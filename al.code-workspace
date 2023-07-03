@@ -5,6 +5,9 @@
     },
     {
       "path": "TimeReg"
+    },
+    {
+      "path": "YourAppName.Test"
     }
   ],
   "settings": {}
