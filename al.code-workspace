@@ -8,6 +8,9 @@
     },
     {
       "path": "YourAppName.Test"
+    },
+    {
+      "path": "YourAppName.Test(2)"
     }
   ],
   "settings": {}
