@@ -1,0 +1,41 @@
+{
+    "name": "Columbus Ruleset",
+    "description": "These rules must be respected by all the AL code written for the project.",
+    "rules": [
+        {
+            "id": "AA0072",
+            "action": "Hidden",
+            "justification": "Suffixes to variable names are not necessary."
+        },
+        {
+            "id":"AS0084",
+            "action": "Hidden",
+            "justification": "Not required for this project."
+        },
+        {
+            "id":"AS0092",
+            "action":"Hidden",
+            "justification":"App insights connection string not required for this project."
+        },
+        {
+            "id":"AA0215",
+            "action":"Hidden",
+            "justification":"Some of app.json properties are not required for this project."
+        },
+        {
+            "id":"AS0051",
+            "action":"Hidden",
+            "justification":"Some of app.json properties are not required for this project."
+        },        
+        {
+            "id": "AA0137",
+            "action": "Error",
+            "justification": "Unused variables should be removed."
+        },
+        {
+            "id": "AS0015",
+            "action":"Hidden",
+            "justification": "The TranslationFile flag must be added to the features array in the app.json file. - this apps are for ENU only"
+        }		
+    ]
+}

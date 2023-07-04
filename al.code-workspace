@@ -1,11 +1,174 @@
 {
-  "folders": [
-    {
-      "path": ".AL-Go"
-    },
-    {
-      "path": "TimeReg"
-    }
-  ],
-  "settings": {}
+	"folders": [
+		{
+			"path": ".AL-Go"
+		},
+		{
+			"path": "TimeReg"
+		}
+	],
+	"settings": {
+		"files.autoSave": "onFocusChange",
+		"git.inputValidationSubjectLength": 75,
+		"al.codeAnalyzers": [
+			"${CodeCop}",
+			"${UICop}",
+			"${PerTenantExtensionCop}"
+		],
+		"al.backgroundCodeAnalysis": true,
+		"al.enableCodeActions": true,
+		"al.enableCodeAnalysis": true,
+		"al.ruleSetPath": "..\\appruleset.json",
+		"cSpell.language": "en",
+		"cSpell.enableFiletypes": [
+			"al"
+		],
+		"cSpell.words": [
+			"addafter",
+			"addbefore",
+			"addlast",
+			"alpackages",
+			"Altapay",
+			"Apport",
+			"asserterror",
+			"Belowx",
+			"Classif",
+			"codeunit",
+			"codeunits",
+			"COLAPI",
+			"COLG",
+			"Colour",
+			"creativ",
+			"cuegroup",
+			"Curr",
+			"Cust",
+			"dataitem",
+			"endregion",
+			"enumextension",
+			"Factbox",
+			"FEFO",
+			"fieldgroups",
+			"Firstname",
+			"GTIN",
+			"Hubbroker",
+			"INSIDERSASTOKEN",
+			"Integr",
+			"integro",
+			"Intrastat",
+			"Inventoriable",
+			"IsEmpty",
+			"ITIICI",
+			"Lastname",
+			"Magento",
+			"Mgmt",
+			"Middlelayer",
+			"movebefore",
+			"nextmajor",
+			"nextminor",
+			"pageextension",
+			"Parcelshop",
+			"Paytrail",
+			"permissionset",
+			"Purch",
+			"RDLC",
+			"requestpage",
+			"Restr",
+			"Reten",
+			"RIMD",
+			"RMID",
+			"setpublishmode",
+			"setrecfilter",
+			"Subform",
+			"Subpage",
+			"tabledata",
+			"tableextension",
+			"Templ",
+			"textbuilder",
+			"Truecommerce",
+			"unapply",
+			"UNSPSC",
+			"webservice",
+			"webservices",
+			"Whse",
+			"WORKDATE"
+		],
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"[json]": {
+			"editor.formatOnSave": false
+		},
+		"alVarHelper.ignoreALPrefix": "BNO",
+		"CRS.ObjectNamePrefix": "BNO ",
+		"CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.OnSaveAlFileAction": "Rename",
+		"CRS.RemovePrefixFromFilename": true,
+		"CRS.RenameWithGit": false,
+		"todo-tree.general.tags": [
+			"BUG",
+			"HACK",
+			"FIXME",
+			"TODO",
+			"XXX",
+			"[ ]",
+			"[x]",
+			"REVIEWLATER",
+			"REFACTOR"
+		],
+		"todo-tree.general.tagGroups": {
+			"FIX": [
+				"FIXIT"
+			],
+			"REVIEWLATER": [
+				"REVIEWLATER"
+			],
+			"REFACTOR": [
+				"REFACTOR"
+			]
+		},
+		"todo-tree.highlights.foregroundColourScheme": [
+			"white",
+			"black",
+			"black",
+			"white",
+			"white",
+			"white",
+			"black",
+			"red"
+		],
+		"todo-tree.highlights.useColourScheme": true,
+		"todo-tree.highlights.customHighlight": {
+			"TODO": {
+				"icon": "check",
+				"type": "line"
+			},
+			"FIXME": {
+				"foreground": "#000000",
+				"iconColour": "#FF0000",
+				"gutterIcon": true
+			},
+			"REVIEWLATER": {
+				"foreground": "#000000",
+				"iconColour": "#FFA500",
+				"gutterIcon": true
+			},
+			"REFACTOR": {
+				"foreground": "#000000",
+				"iconColour": "#ff5e00",
+				"gutterIcon": true,
+				"type": "line"
+			}
+		},
+		"todo-tree.highlights.enabled": false,
+		"todo-tree.regex.regexCaseSensitive": false,
+		"al.packageCachePath": "../.alpackages",
+		"alOutline.enableCodeCopFixes": true,
+		"al.compilationOptions": {
+			"generateReportLayout": true
+		},
+		"alCodeActions.varParameters": [
+			"IsHandled"
+		]
+	}
 }

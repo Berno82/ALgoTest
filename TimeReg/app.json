@@ -3,13 +3,8 @@
   "name": "TimeReg",
   "publisher": "Berno",
   "version": "1.0.0.0",
-  "brief": "",
-  "description": "",
-  "privacyStatement": "",
-  "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
+  "brief": "Time Registration",
+  "description": "Time Registration",
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
@@ -21,11 +16,12 @@
     }
   ],
   "features": [
-    "NoImplicitWith"
+    "NoImplicitWith", "TranslationFile"
   ],
   "resourceExposurePolicy": {
     "allowDebugging": true,
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
-  }
+  },
+  "target": "Cloud"
 }
