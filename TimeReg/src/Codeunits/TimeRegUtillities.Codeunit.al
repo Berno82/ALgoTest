@@ -6,14 +6,16 @@ codeunit 75000 "BNO TimeReg Utillities"
         TimeEntryLine: Record "BNO Time Entry Line";
         TimeRegSetup: Record "BNO TimeReg Setup";
     begin
-        TimeEntryLine.SetRange(User, UserName);
-        TimeEntryLine.SetRange(Date, Today());
-        if TimeEntryLine.FindLast() then
-            LastTime := TimeEntryLine."To Time"
-        else begin
-            TimeRegSetup.Get();
+        TimeRegSetup.Get(UserName);
+        if not TimeRegSetup.Pause then begin
+            TimeEntryLine.SetRange(User, UserName);
+            TimeEntryLine.SetRange(Date, Today());
+            if TimeEntryLine.FindLast() then
+                LastTime := TimeEntryLine."To Time"
+            else
+                LastTime := TimeRegSetup."Last Time";
+        end else
             LastTime := TimeRegSetup."Last Time";
-        end;
 
     end;
 

@@ -3,6 +3,7 @@ page 75000 "BNO Time Sheet"
 {
     ApplicationArea = All;
     Caption = 'Time Sheet';
+    Editable = true;
     PageType = Card;
     SourceTable = "BNO Time Entry Line";
     SourceTableTemporary = true;
@@ -52,7 +53,7 @@ page 75000 "BNO Time Sheet"
                 Image = Action;
                 ShortcutKey = 'Ctrl+Enter';
                 ToolTip = 'Executes the Create Time Entry action.';
-                Visible = false;
+                // Visible = false;
 
                 trigger OnAction()
                 var
@@ -67,8 +68,10 @@ page 75000 "BNO Time Sheet"
                     TimeEntryLine.Description := Rec.Description;
                     TimeEntryLine.Activity := Rec.Activity;
                     TimeEntryLine.Insert(true);
+
                 end;
             }
+
         }
         area(Promoted)
         {
@@ -76,5 +79,21 @@ page 75000 "BNO Time Sheet"
         }
     }
     var
+
         ActivityTxt: Text[2048];
+
+    trigger OnOpenPage()
+    var
+        TimeRegSetup: Record "BNO TimeReg Setup";
+    begin
+        TimeRegSetup.Get(UserId());
+        if TimeRegSetup.Pause then
+            TimeRegSetup."Last Time" := Time();
+    end;
+
+    procedure SetRecords(var TempTimeEntryLine: Record "BNO Time Entry Line" temporary)
+    begin
+        Rec := TempTimeEntryLine;
+        Rec.Insert();
+    end;
 }

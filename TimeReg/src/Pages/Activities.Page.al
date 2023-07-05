@@ -1,7 +1,7 @@
 page 75004 "BNO Activities"
 {
     ApplicationArea = All;
-    Caption = 'BNO Activities';
+    Caption = 'Activities';
     PageType = List;
     SourceTable = "BNO Activity";
     UsageCategory = Lists;

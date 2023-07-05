@@ -4,6 +4,7 @@ page 75003 "BNO TimeReg Setup"
     Caption = 'TimeReg Setup';
     PageType = Card;
     SourceTable = "BNO TimeReg Setup";
+    UsageCategory = Administration;
 
     layout
     {

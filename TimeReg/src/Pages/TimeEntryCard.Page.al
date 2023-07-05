@@ -48,24 +48,28 @@ page 75001 "BNO Time Entry Card"
                 Caption = 'Start Time';
                 Image = TimesheetWindowLauncher;
                 ToolTip = 'Executes the Start Time action.';
-                Visible = false;
+                // Visible = false;
 
                 trigger OnAction()
                 var
                     TimeEntryLine: Record "BNO Time Entry Line";
+                    TimeSheet: Page "BNO Time Sheet";
                 begin
                     TimeRegSetup.Get(UserId());
                     TimeEntry.Get(Format(UserId()), Today());
                     TimeEntryLine.SetRange(User, Format(UserId()));
                     TimeEntryLine.SetRange(Date, Today());
                     TimeEntryLine.SetRange(Paused, false);
-
-                    Page.RunModal(Page::"BNO Time Sheet");
-                    while not TimeRegSetup.Pause do begin
-                        Sleep(TimeRegSetup."Wait Time");
-                        if TimeEntryLine.FindLast() then;
-                        Page.RunModal(Page::"BNO Time Sheet", TimeEntryLine);
+                    if not TimeEntryLine.FindLast() then begin
+                        TimeEntryLine.Init();
+                        TimeEntryLine.User := Format(UserId());
+                        TimeEntryLine.Date := Today();
+                        TimeEntryLine.Insert();
                     end;
+
+
+                    TimeSheet.SetRecords(TimeEntryLine);
+                    TimeSheet.RunModal();
                 end;
             }
             action(Pause)
@@ -73,7 +77,6 @@ page 75001 "BNO Time Entry Card"
                 Caption = 'Pause';
                 Image = Pause;
                 ToolTip = 'Pause Time registration';
-                Visible = false;
 
                 trigger OnAction()
                 begin
@@ -97,6 +100,9 @@ page 75001 "BNO Time Entry Card"
             TimeRegSetup.Init();
             TimeRegSetup.User := Format(UserId());
             TimeRegSetup.Insert();
+        end else begin
+            TimeRegSetup."Last Time" := Time();
+            TimeRegSetup.Modify(false);
         end;
 
         if not TimeEntry.Get(UserId(), Today()) then begin
