@@ -15,7 +15,7 @@ table 75000 "BNO Time Entry"
             Caption = 'Date';
 
         }
-        field(3; "Accumulated Time"; Duration)
+        field(3; "Accumulated Time"; Decimal)
         {
             Caption = 'Accumulated Time';
             FieldClass = FlowField;

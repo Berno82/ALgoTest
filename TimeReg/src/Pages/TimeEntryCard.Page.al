@@ -48,6 +48,7 @@ page 75001 "BNO Time Entry Card"
                 Caption = 'Start Time';
                 Image = TimesheetWindowLauncher;
                 ToolTip = 'Executes the Start Time action.';
+                Visible = false;
 
                 trigger OnAction()
                 var
@@ -72,6 +73,7 @@ page 75001 "BNO Time Entry Card"
                 Caption = 'Pause';
                 Image = Pause;
                 ToolTip = 'Pause Time registration';
+                Visible = false;
 
                 trigger OnAction()
                 begin
@@ -80,6 +82,11 @@ page 75001 "BNO Time Entry Card"
                     TimeRegSetup.Modify();
                 end;
             }
+        }
+        area(Promoted)
+        {
+            actionref(StartTime; "Start Time") { }
+            actionref(PauseRef; Pause) { }
         }
     }
 
@@ -92,11 +99,12 @@ page 75001 "BNO Time Entry Card"
             TimeRegSetup.Insert();
         end;
 
-        if not TimeEntry.Get(UserId(), Today()) then
+        if not TimeEntry.Get(UserId(), Today()) then begin
             TimeEntry.Init();
-        TimeEntry.User := Format(UserId());
-        TimeEntry.Date := Today();
-        TimeEntry.Insert(true);
+            TimeEntry.User := Format(UserId());
+            TimeEntry.Date := Today();
+            TimeEntry.Insert(true);
+        end;
 
         Rec.FilterGroup(2);
         Rec.SetRange(User, UserId());
