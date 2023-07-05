@@ -1,4 +1,4 @@
-table 75000 "BNO Time Entry"
+table 75003 "BNO Time Entry Archive"
 {
     Caption = 'Time Entry';
     DataClassification = CustomerContent;
@@ -19,7 +19,7 @@ table 75000 "BNO Time Entry"
         {
             Caption = 'Accumulated Time';
             FieldClass = FlowField;
-            CalcFormula = sum("BNO Time Entry Line"."Registred Time" where(Date = field(Date), Paused = const(false)));
+            CalcFormula = sum("BNO Time Entry Line"."Registred Time" where(Date = field(Date)));
 
         }
     }

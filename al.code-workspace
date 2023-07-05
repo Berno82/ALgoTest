@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "TimeReg.Test"
+		},
+		{
+			"path": .alpackages
 		}
 	],
 	"settings": {

@@ -1,50 +1,45 @@
-table 75001 "BNO Time Entry Line"
+table 75004 "BNO Time Entry Line Archive"
 {
     Caption = 'BNO Time Entry Line';
     DataClassification = CustomerContent;
 
     fields
     {
-        field(1; User; Text[100])
+        field(2; User; Text[100])
         {
             Caption = 'User';
+
         }
-        field(2; "Date"; Date)
+        field(3; "Date"; Date)
         {
             Caption = 'Date';
+
         }
-        field(3; "Entry No."; Integer)
+        field(4; "Entry No."; Integer)
         {
             AutoIncrement = true;
             Caption = 'Entry No.';
         }
-        field(4; "From Time"; Time)
+        field(5; "From Time"; Time)
         {
             Caption = 'From';
         }
-        field(5; "To Time"; Time)
+        field(6; "To Time"; Time)
         {
             Caption = 'To';
         }
-        field(6; "Registred Time"; Decimal)
+        field(7; "Registred Time"; Duration)
         {
             Caption = 'Registred Time';
         }
-        field(7; Description; Text[2048])
+        field(8; Description; Text[1024])
         {
             Caption = 'Description';
         }
-        field(8; Activity; Code[20])
+        field(9; Activity; Code[20])
         {
             Caption = 'Activity';
-            TableRelation = "BNO Activity";
-            ValidateTableRelation = false;
         }
-        field(9; Paused; Boolean)
-        {
-            Caption = 'Paused';
-        }
-
     }
     keys
     {
@@ -64,9 +59,8 @@ table 75001 "BNO Time Entry Line"
         Rec."Registred Time" := UpdateTime();
     end;
 
-    local procedure UpdateTime() Hours: Decimal
+    local procedure UpdateTime(): Duration
     begin
-        Hours := (Rec."To Time" - Rec."From Time") / 60000;
-
+        exit(Rec."To Time" - Rec."From Time");
     end;
 }
