@@ -5,38 +5,36 @@ table 75004 "BNO Time Entry Line Archive"
 
     fields
     {
-        field(2; User; Text[100])
+        field(1; User; Text[100])
         {
             Caption = 'User';
-
         }
-        field(3; "Date"; Date)
+        field(2; "Date"; Date)
         {
             Caption = 'Date';
-
         }
-        field(4; "Entry No."; Integer)
+        field(3; "Entry No."; Integer)
         {
             AutoIncrement = true;
             Caption = 'Entry No.';
         }
-        field(5; "From Time"; Time)
+        field(4; "From Time"; Time)
         {
             Caption = 'From';
         }
-        field(6; "To Time"; Time)
+        field(5; "To Time"; Time)
         {
             Caption = 'To';
         }
-        field(7; "Registred Time"; Duration)
+        field(6; "Registred Time"; Decimal)
         {
             Caption = 'Registred Time';
         }
-        field(8; Description; Text[1024])
+        field(7; Description; Text[1024])
         {
             Caption = 'Description';
         }
-        field(9; Activity; Code[20])
+        field(8; Activity; Code[20])
         {
             Caption = 'Activity';
         }
@@ -52,15 +50,38 @@ table 75004 "BNO Time Entry Line Archive"
     trigger OnInsert()
     begin
         Rec."Registred Time" := UpdateTime();
+        CleanUpSorted();
+
     end;
 
     trigger OnModify()
     begin
         Rec."Registred Time" := UpdateTime();
+        CleanUpSorted();
+
     end;
 
-    local procedure UpdateTime(): Duration
+    procedure UpdateTime() Hours: Decimal
+    var
+        TimeRegSetup: Record "BNO TimeReg Setup";
     begin
-        exit(Rec."To Time" - Rec."From Time");
+        TimeRegSetup.Get(Rec.User);
+        Hours := (Rec."To Time" - Rec."From Time") / 6000000;
+        if TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units then
+            Hours := Hours * (100 / 60);
+    end;
+
+    local procedure CleanUpSorted()
+    var
+        TimeEntryArchive: Record "BNO Time Entry Archive";
+        TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
+    begin
+        TimeEntryArchive.Get(Rec.User, Rec.Date);
+        TimeEntryArchive.Sorted := false;
+        TimeEntryArchive.Modify();
+
+        TimeEntryLineSorted.SetRange(User, Rec.User);
+        TimeEntryLineSorted.SetRange(Date, Rec.Date);
+        TimeEntryLineSorted.DeleteAll();
     end;
 }

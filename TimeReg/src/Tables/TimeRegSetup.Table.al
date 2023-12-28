@@ -29,6 +29,17 @@ table 75002 "BNO TimeReg Setup"
         {
             Caption = 'Wait Time';
         }
+        field(6; "Unit of Measure"; Option)
+        {
+            Caption = 'Unit of Measure';
+            OptionMembers = "Units","Hours";
+
+            trigger OnValidate()
+            begin
+                if Rec."Unit of Measure" <> xRec."Unit of Measure" then
+                    UpdateUnits();
+            end;
+        }
     }
     keys
     {
@@ -37,4 +48,29 @@ table 75002 "BNO TimeReg Setup"
             Clustered = true;
         }
     }
+
+    local procedure UpdateUnits()
+    var
+        TimeEntryLine: Record "BNO Time Entry Line";
+        TimeEntryLineArchive: Record "BNO Time Entry Line Archive";
+        TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
+    begin
+        if TimeEntryLine.FindSet() then
+            repeat
+                TimeEntryLine.UpdateTime();
+            until TimeEntryLine.Next() = 0;
+
+        if TimeEntryLineArchive.FindSet() then
+            repeat
+                TimeEntryLineArchive.UpdateTime();
+            until TimeEntryLineArchive.Next() = 0;
+
+        if TimeEntryLineSorted.FindSet() then
+            repeat
+                TimeEntryLineSorted.UpdateTime();
+            until TimeEntryLineSorted.Next() = 0;
+
+    end;
+
+
 }

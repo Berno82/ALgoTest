@@ -1,7 +1,7 @@
 codeunit 75000 "BNO TimeReg Utillities"
 {
     ///<summary>Get the last time registered for user</summary>
-    procedure GetLastTime(UserName: Text) LastTime: Time
+    procedure GetLastTime(UserName: Text[100]) LastTime: Time
     var
         TimeEntryLine: Record "BNO Time Entry Line";
         TimeRegSetup: Record "BNO TimeReg Setup";
@@ -40,5 +40,104 @@ codeunit 75000 "BNO TimeReg Utillities"
                 TimeEntryLineArchive.TransferFields(TimeEntryLine);
                 TimeEntryLineArchive.Insert(true)
             until TimeEntryLine.Next() = 0;
+    end;
+
+    procedure SumLines(UserName: Text[100]; Date: Date)
+    var
+        TempTimeEntryLineArchive: Record "BNO Time Entry Line Archive" temporary;
+        TimeEntryLineArchive: Record "BNO Time Entry Line Archive";
+        TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
+        NoLinesErr: Label 'No Time entry lines found';
+    begin
+        TimeEntryLineArchive.SetRange(User, UserName);
+        TimeEntryLineArchive.SetRange(Date, Date);
+        if TimeEntryLineArchive.IsEmpty then
+            Error(NoLinesErr)
+        else begin
+            TimeEntryLineArchive.FindSet();
+            repeat
+                TempTimeEntryLineArchive.Init();
+                TempTimeEntryLineArchive.TransferFields(TimeEntryLineArchive);
+                TempTimeEntryLineArchive.Insert();
+            until TimeEntryLineArchive.Next() = 0;
+
+            TimeEntryLineArchive.FindSet();
+            repeat
+                TempTimeEntryLineArchive.SetRange(Activity, TimeEntryLineArchive.Activity);
+                if TempTimeEntryLineArchive.FindSet() then begin
+                    TimeEntryLineSorted.Init();
+                    TimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
+                    TimeEntryLineSorted.Insert();
+                    if TempTimeEntryLineArchive.Count > 1 then begin
+                        TempTimeEntryLineArchive.SetRange(Description, TimeEntryLineArchive.Description);
+                        if TempTimeEntryLineArchive.Count > 1 then begin
+                            TempTimeEntryLineArchive.FindSet();
+                            repeat
+                                TimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
+                                TimeEntryLineSorted.Modify();
+                            until TempTimeEntryLineArchive.Next() = 0;
+                        end;
+                    end;
+                    TempTimeEntryLineArchive.DeleteAll();
+                end;
+            until TimeEntryLineArchive.Next() = 0;
+
+        end;
+
+        if not TempTimeEntryLineArchive.IsEmpty then begin
+            TempTimeEntryLineArchive.FindSet();
+            repeat
+                TimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
+                TempTimeEntryLineArchive.Insert(true);
+            until TempTimeEntryLineArchive.Next() = 0;
+        end;
+    end;
+    ///<summary>Sort Current time entries and display</summary>
+    procedure SumCurrentLines(UserName: Text[100]; Date: Date)
+    var
+        TempTimeEntryLineArchive: Record "BNO Time Entry Line Archive" temporary;
+        TempTimeEntryLineSorted: Record "BNO Time Entry Line Sorted" temporary;
+        TimeEntryLine: Record "BNO Time Entry Line";
+        NoLinesErr: Label 'No Time entry lines found';
+    begin
+
+        TimeEntryLine.SetRange(User, UserName);
+        TimeEntryLine.SetRange(Date, Date);
+        if TimeEntryLine.IsEmpty then
+            Error(NoLinesErr)
+        else begin
+
+            TimeEntryLine.FindSet();
+            repeat
+                TempTimeEntryLineArchive.Init();
+                TempTimeEntryLineArchive.TransferFields(TimeEntryLine);
+                TempTimeEntryLineArchive.Insert();
+            until TimeEntryLine.Next() = 0;
+
+            TimeEntryLine.FindSet();
+            repeat
+                TempTimeEntryLineArchive.SetRange(Activity, TimeEntryLine.Activity);
+                TempTimeEntryLineArchive.SetRange(Description, TimeEntryLine.Description);
+                if not TempTimeEntryLineArchive.IsEmpty then begin
+                    TempTimeEntryLineArchive.FindSet();
+                    TempTimeEntryLineSorted.Init();
+                    TempTimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
+                    TempTimeEntryLineSorted.Insert();
+                    if TempTimeEntryLineArchive.Count > 1 then begin
+                        TempTimeEntryLineArchive.FindSet();
+                        TempTimeEntryLineArchive.Next();
+                        repeat
+                            TempTimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
+                            TempTimeEntryLineSorted.Modify();
+                        until TempTimeEntryLineArchive.Next() = 0;
+                    end;
+                    TempTimeEntryLineArchive.DeleteAll();
+                end;
+            until TimeEntryLine.Next() = 0;
+
+            Page.Run(Page::"BNO Sorted Lines", TempTimeEntryLineSorted);
+
+        end;
+
     end;
 }

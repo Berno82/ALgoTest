@@ -5,6 +5,7 @@ page 75001 "BNO Time Entry Card"
     PageType = Card;
     SourceTable = "BNO Time Entry";
     UsageCategory = Administration;
+    RefreshOnActivate = true;
 
     layout
     {
@@ -16,6 +17,7 @@ page 75001 "BNO Time Entry Card"
 
                 field(User; Rec.User)
                 {
+                    Editable = false;
                     ToolTip = 'Specifies the value of the User field.';
                 }
                 field("Date"; Rec."Date")
@@ -24,6 +26,7 @@ page 75001 "BNO Time Entry Card"
                 }
                 field("Accumulated Time"; Rec."Accumulated Time")
                 {
+                    Editable = false;
                     ToolTip = 'Specifies the value of the Accumulated Time field.';
                 }
 
@@ -42,13 +45,13 @@ page 75001 "BNO Time Entry Card"
     {
         area(Processing)
         {
-            action("Start Time")
+            action(StartTime)
             {
 
                 Caption = 'Start Time';
+
                 Image = TimesheetWindowLauncher;
                 ToolTip = 'Executes the Start Time action.';
-                // Visible = false;
 
                 trigger OnAction()
                 var
@@ -64,32 +67,67 @@ page 75001 "BNO Time Entry Card"
                         TimeEntryLine.Init();
                         TimeEntryLine.User := Format(UserId());
                         TimeEntryLine.Date := Today();
-                        TimeEntryLine.Insert();
                     end;
 
 
-                    TimeSheet.SetRecords(TimeEntryLine);
-                    TimeSheet.RunModal();
+                    TimeSheet.SetRecord(TimeEntryLine);
+                    TimeSheet.Run();
                 end;
             }
-            action(Pause)
+            action(Sum)
             {
-                Caption = 'Pause';
-                Image = Pause;
-                ToolTip = 'Pause Time registration';
+                Caption = 'Sum';
+                Image = NewSum;
+                ToolTip = 'Executes the Sum action.';
 
                 trigger OnAction()
+                var
+                    TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
                 begin
-                    TimeRegSetup.Get(UserId());
-                    TimeRegSetup.Pause := true;
-                    TimeRegSetup.Modify();
+
+                    TimeRegUtillities.SumCurrentLines(Rec.User, Rec.Date);
+                end;
+            }
+        }
+        area(Navigation)
+        {
+            action("Archive Entries")
+            {
+                Caption = 'Archive Time Entries';
+                Image = Archive;
+                ToolTip = 'Executes the Archive Time Entries action.';
+
+                trigger OnAction()
+                var
+                    TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
+                begin
+                    TimeRegUtillities.ArchiveEntries();
+                end;
+            }
+            action("Archive Lines")
+            {
+                Caption = 'Archive Time Lines';
+                Image = LinesFromTimesheet;
+                ToolTip = 'Executes the Archive Time Lines action.';
+
+                trigger OnAction()
+                var
+                    TimeEntryArchive: Record "BNO Time Entry Archive";
+                    TimeEntriesArchive: Page "BNO Time Entries Archive";
+                begin
+                    TimeEntryArchive.FilterGroup(2);
+                    TimeEntryArchive.SetRange(User, Rec.User);
+                    TimeEntryArchive.SetRange(Date, Rec.Date);
+                    TimeEntryArchive.FilterGroup(0);
+                    TimeEntriesArchive.SetRecord(TimeEntryArchive);
+                    TimeEntriesArchive.Run();
                 end;
             }
         }
         area(Promoted)
         {
-            actionref(StartTime; "Start Time") { }
-            actionref(PauseRef; Pause) { }
+            actionref(StartTime_Ref; StartTime) { }
+            actionref(Sum_Ref; Sum) { }
         }
     }
 
@@ -102,6 +140,7 @@ page 75001 "BNO Time Entry Card"
             TimeRegSetup.Insert();
         end else begin
             TimeRegSetup."Last Time" := Time();
+            TimeRegSetup.Pause := false;
             TimeRegSetup.Modify(false);
         end;
 

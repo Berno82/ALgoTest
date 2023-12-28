@@ -23,5 +23,6 @@
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
   },
-  "target": "Cloud"
+  "target": "Cloud",
+  "runtime": "11.1"
 }

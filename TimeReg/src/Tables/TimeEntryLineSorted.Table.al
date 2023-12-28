@@ -1,4 +1,4 @@
-table 75001 "BNO Time Entry Line"
+table 75006 "BNO Time Entry Line Sorted"
 {
     Caption = 'BNO Time Entry Line';
     DataClassification = CustomerContent;
@@ -8,10 +8,12 @@ table 75001 "BNO Time Entry Line"
         field(1; User; Text[100])
         {
             Caption = 'User';
+
         }
         field(2; "Date"; Date)
         {
             Caption = 'Date';
+
         }
         field(3; "Entry No."; Integer)
         {
@@ -37,14 +39,7 @@ table 75001 "BNO Time Entry Line"
         field(8; Activity; Code[20])
         {
             Caption = 'Activity';
-            TableRelation = "BNO Activity"."No.";
-            ValidateTableRelation = false;
         }
-        field(9; Paused; Boolean)
-        {
-            Caption = 'Paused';
-        }
-
     }
     keys
     {
@@ -55,13 +50,12 @@ table 75001 "BNO Time Entry Line"
     }
 
     trigger OnInsert()
+    var
+        TimeEntryArchive: Record "BNO Time Entry Archive";
     begin
-        Rec."Registred Time" := UpdateTime();
-    end;
-
-    trigger OnModify()
-    begin
-        Rec."Registred Time" := UpdateTime();
+        TimeEntryArchive.Get(Rec.User, Rec.Date);
+        TimeEntryArchive.Sorted := true;
+        TimeEntryArchive.Modify();
     end;
 
     procedure UpdateTime() Hours: Decimal

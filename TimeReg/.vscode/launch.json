@@ -8,8 +8,11 @@
             "server": "http://timereg",
             "serverInstance": "BC",
             "port": 7049,
+            "startupObjectId": 75001,
+            "startupObjectType": "Page",
             "tenant": "default",
-            "authentication": "UserPassword"
+            "authentication": "UserPassword",
+            "schemaUpdateMode": "ForceSync"
         }
     ]
 }

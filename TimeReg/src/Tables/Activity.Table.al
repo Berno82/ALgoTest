@@ -5,20 +5,29 @@ table 75005 "BNO Activity"
 
     fields
     {
-        field(1; "No."; Code[20])
+        field(1; "User Name"; Text[100])
+        {
+            Caption = 'User Name';
+        }
+        field(2; "No."; Code[20])
         {
             Caption = 'No.';
         }
-        field(2; Description; Text[2048])
+        field(3; Description; Text[2048])
         {
             Caption = 'Description';
         }
     }
     keys
     {
-        key(PK; "No.")
+        key(PK; "User Name", "No.")
         {
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    begin
+        Rec."User Name" := Format(UserId());
+    end;
 }
