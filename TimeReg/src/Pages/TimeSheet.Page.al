@@ -53,7 +53,6 @@ page 75000 "BNO Time Sheet"
                 Image = Action;
                 ShortcutKey = 'Ctrl+Enter';
                 ToolTip = 'Executes the Create Time Entry action.';
-                // Visible = false;
 
                 trigger OnAction()
                 var
@@ -75,8 +74,7 @@ page 75000 "BNO Time Sheet"
                         TimeRegSetup.Pause := false;
                         TimeRegSetup.Modify();
                     end;
-
-
+                    CurrPage.Close();
                 end;
             }
             action(Pause)
@@ -108,6 +106,15 @@ page 75000 "BNO Time Sheet"
     var
 
         ActivityTxt: Text[2048];
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    var
+        CloseErr: Label 'Can only be closed by using actions';
+
+    begin
+        Message(CloseErr);
+        exit(false);
+    end;
 
     procedure SetRecord(var TempTimeEntryLine: Record "BNO Time Entry Line" temporary)
     begin

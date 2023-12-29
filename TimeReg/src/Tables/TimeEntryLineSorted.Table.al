@@ -28,15 +28,19 @@ table 75006 "BNO Time Entry Line Sorted"
         {
             Caption = 'To';
         }
-        field(6; "Registred Time"; Decimal)
+        field(6; "Registred Time Units"; Decimal)
         {
             Caption = 'Registred Time';
         }
-        field(7; Description; Text[1024])
+        field(7; "Registred Time"; Duration)
+        {
+            Caption = 'Registred Time';
+        }
+        field(8; Description; Text[1024])
         {
             Caption = 'Description';
         }
-        field(8; Activity; Code[20])
+        field(9; Activity; Code[20])
         {
             Caption = 'Activity';
         }
@@ -56,15 +60,5 @@ table 75006 "BNO Time Entry Line Sorted"
         TimeEntryArchive.Get(Rec.User, Rec.Date);
         TimeEntryArchive.Sorted := true;
         TimeEntryArchive.Modify();
-    end;
-
-    procedure UpdateTime() Hours: Decimal
-    var
-        TimeRegSetup: Record "BNO TimeReg Setup";
-    begin
-        TimeRegSetup.Get(Rec.User);
-        Hours := (Rec."To Time" - Rec."From Time") / 6000000;
-        if TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units then
-            Hours := Hours * (100 / 60);
     end;
 }

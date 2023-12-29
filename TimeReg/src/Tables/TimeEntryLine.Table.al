@@ -26,21 +26,26 @@ table 75001 "BNO Time Entry Line"
         {
             Caption = 'To';
         }
-        field(6; "Registred Time"; Decimal)
+        field(6; "Registred Time Units"; Decimal)
         {
             Caption = 'Registred Time';
         }
-        field(7; Description; Text[1024])
+        field(7; "Registred Time"; Duration)
+        {
+            Caption = 'Registred Time';
+
+        }
+        field(8; Description; Text[1024])
         {
             Caption = 'Description';
         }
-        field(8; Activity; Code[20])
+        field(9; Activity; Code[20])
         {
             Caption = 'Activity';
             TableRelation = "BNO Activity"."No.";
             ValidateTableRelation = false;
         }
-        field(9; Paused; Boolean)
+        field(10; Paused; Boolean)
         {
             Caption = 'Paused';
         }
@@ -56,21 +61,18 @@ table 75001 "BNO Time Entry Line"
 
     trigger OnInsert()
     begin
-        Rec."Registred Time" := UpdateTime();
+        Rec."Registred Time Units" := UpdateTime();
     end;
 
     trigger OnModify()
     begin
-        Rec."Registred Time" := UpdateTime();
+        Rec."Registred Time Units" := UpdateTime();
     end;
 
     procedure UpdateTime() Hours: Decimal
-    var
-        TimeRegSetup: Record "BNO TimeReg Setup";
     begin
-        TimeRegSetup.Get(Rec.User);
-        Hours := (Rec."To Time" - Rec."From Time") / 6000000;
-        if TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units then
-            Hours := Hours * (100 / 60);
+        Hours := (Rec."To Time" - Rec."From Time") / 6000000 * (100 / 60);
+
+        Rec."Registred Time" := Rec."To Time" - Rec."From Time";
     end;
 }

@@ -13,16 +13,23 @@ table 75003 "BNO Time Entry Archive"
         {
             Caption = 'Date';
         }
-        field(3; "Accumulated Time"; Duration)
+        field(3; "Accumulated Time Units"; Decimal)
         {
             Caption = 'Accumulated Time';
             FieldClass = FlowField;
-            CalcFormula = sum("BNO Time Entry Line"."Registred Time" where(Date = field(Date)));
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Date = field(Date)));
 
         }
         field(4; Sorted; Boolean)
         {
             Caption = 'Sorted';
+        }
+        field(5; "Accumulated Time"; Duration)
+        {
+            Caption = 'Accumulated Time';
+            FieldClass = FlowField;
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Date = field(Date)));
+
         }
     }
     keys

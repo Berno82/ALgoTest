@@ -15,7 +15,14 @@ table 75000 "BNO Time Entry"
             Caption = 'Date';
 
         }
-        field(3; "Accumulated Time"; Decimal)
+        field(3; "Accumulated Time Units"; Decimal)
+        {
+            Caption = 'Accumulated Time';
+            FieldClass = FlowField;
+            CalcFormula = sum("BNO Time Entry Line"."Registred Time Units" where(Date = field(Date), Paused = const(false)));
+
+        }
+        field(4; "Accumulated Time"; Duration)
         {
             Caption = 'Accumulated Time';
             FieldClass = FlowField;

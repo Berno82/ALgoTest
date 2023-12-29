@@ -47,6 +47,7 @@ codeunit 75000 "BNO TimeReg Utillities"
         TempTimeEntryLineArchive: Record "BNO Time Entry Line Archive" temporary;
         TimeEntryLineArchive: Record "BNO Time Entry Line Archive";
         TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
+        TimeEntryArchive: Record "BNO Time Entry Archive";
         NoLinesErr: Label 'No Time entry lines found';
     begin
         TimeEntryLineArchive.SetRange(User, UserName);
@@ -64,34 +65,30 @@ codeunit 75000 "BNO TimeReg Utillities"
             TimeEntryLineArchive.FindSet();
             repeat
                 TempTimeEntryLineArchive.SetRange(Activity, TimeEntryLineArchive.Activity);
-                if TempTimeEntryLineArchive.FindSet() then begin
+                TempTimeEntryLineArchive.SetRange(Description, TimeEntryLineArchive.Description);
+                if not TempTimeEntryLineArchive.IsEmpty() then begin
+                    TempTimeEntryLineArchive.FindSet();
                     TimeEntryLineSorted.Init();
                     TimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
                     TimeEntryLineSorted.Insert();
                     if TempTimeEntryLineArchive.Count > 1 then begin
-                        TempTimeEntryLineArchive.SetRange(Description, TimeEntryLineArchive.Description);
-                        if TempTimeEntryLineArchive.Count > 1 then begin
-                            TempTimeEntryLineArchive.FindSet();
-                            repeat
-                                TimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
-                                TimeEntryLineSorted.Modify();
-                            until TempTimeEntryLineArchive.Next() = 0;
-                        end;
+                        TempTimeEntryLineArchive.FindSet();
+                        repeat
+                            TimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
+                            TimeEntryLineSorted."Registred Time Units" += TempTimeEntryLineArchive."Registred Time Units";
+                            TimeEntryLineSorted.Modify();
+                        until TempTimeEntryLineArchive.Next() = 0;
                     end;
                     TempTimeEntryLineArchive.DeleteAll();
                 end;
             until TimeEntryLineArchive.Next() = 0;
 
         end;
-
-        if not TempTimeEntryLineArchive.IsEmpty then begin
-            TempTimeEntryLineArchive.FindSet();
-            repeat
-                TimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
-                TempTimeEntryLineArchive.Insert(true);
-            until TempTimeEntryLineArchive.Next() = 0;
-        end;
+        TimeEntryArchive.Get(UserName, Date);
+        TimeEntryArchive.Sorted := true;
+        TimeEntryArchive.Modify();
     end;
+
     ///<summary>Sort Current time entries and display</summary>
     procedure SumCurrentLines(UserName: Text[100]; Date: Date)
     var
@@ -128,6 +125,7 @@ codeunit 75000 "BNO TimeReg Utillities"
                         TempTimeEntryLineArchive.Next();
                         repeat
                             TempTimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
+                            TempTimeEntryLineSorted."Registred Time Units" += TempTimeEntryLineArchive."Registred Time Units";
                             TempTimeEntryLineSorted.Modify();
                         until TempTimeEntryLineArchive.Next() = 0;
                     end;

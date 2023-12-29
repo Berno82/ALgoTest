@@ -2,15 +2,28 @@ page 75001 "BNO Time Entry Card"
 {
     ApplicationArea = All;
     Caption = 'TimeReg';
+    Editable = false;
     PageType = Card;
+    RefreshOnActivate = true;
     SourceTable = "BNO Time Entry";
     UsageCategory = Administration;
-    RefreshOnActivate = true;
 
     layout
     {
         area(content)
         {
+            usercontrol(TimerControl; "BNO TimerControl")
+            {
+                ApplicationArea = All;
+                trigger NewTimeEntry()
+                begin
+                    Message('NewTimeEntry');
+                    CurrPage.TimerControl.StopTime();
+                    EnterTimeEntryLine();
+                    if not TimeRegSetup.Pause then
+                        CurrPage.TimerControl.StartTime(TimeRegSetup.Interval * 60000);
+                end;
+            }
             group(General)
             {
                 Caption = 'General';
@@ -24,10 +37,18 @@ page 75001 "BNO Time Entry Card"
                 {
                     ToolTip = 'Specifies the value of the Date field.';
                 }
+
                 field("Accumulated Time"; Rec."Accumulated Time")
                 {
                     Editable = false;
+                    Visible = not Units;
                     ToolTip = 'Specifies the value of the Accumulated Time field.';
+                }
+                field("Accumulated Time Units"; Rec."Accumulated Time Units")
+                {
+                    Editable = false;
+                    Visible = Units;
+                    ToolTip = 'Specifies the value of the Accumulated Time Units field.';
                 }
 
             }
@@ -49,29 +70,34 @@ page 75001 "BNO Time Entry Card"
             {
 
                 Caption = 'Start Time';
-
-                Image = TimesheetWindowLauncher;
+                Image = Start;
                 ToolTip = 'Executes the Start Time action.';
 
                 trigger OnAction()
-                var
-                    TimeEntryLine: Record "BNO Time Entry Line";
-                    TimeSheet: Page "BNO Time Sheet";
                 begin
-                    TimeRegSetup.Get(UserId());
-                    TimeEntry.Get(Format(UserId()), Today());
-                    TimeEntryLine.SetRange(User, Format(UserId()));
-                    TimeEntryLine.SetRange(Date, Today());
-                    TimeEntryLine.SetRange(Paused, false);
-                    if not TimeEntryLine.FindLast() then begin
-                        TimeEntryLine.Init();
-                        TimeEntryLine.User := Format(UserId());
-                        TimeEntryLine.Date := Today();
-                    end;
+                    CurrPage.TimerControl.StartTime(TimeRegSetup.Interval * 60000);
+                end;
+            }
+            action(StopTime)
+            {
+                Caption = 'Stop Time';
+                Image = Stop;
+                ToolTip = 'Executes the Stop Time action.';
 
+                trigger OnAction()
+                begin
+                    CurrPage.TimerControl.StopTime();
+                end;
+            }
+            action("Enter Time Entry Line")
+            {
+                Caption = 'Enter Time Entry Line';
+                Image = Timesheet;
+                ToolTip = 'Enter Time Entry Line manually.';
 
-                    TimeSheet.SetRecord(TimeEntryLine);
-                    TimeSheet.Run();
+                trigger OnAction()
+                begin
+                    EnterTimeEntryLine();
                 end;
             }
             action(Sum)
@@ -93,7 +119,7 @@ page 75001 "BNO Time Entry Card"
         {
             action("Archive Entries")
             {
-                Caption = 'Archive Time Entries';
+                Caption = 'Archive Entries';
                 Image = Archive;
                 ToolTip = 'Executes the Archive Time Entries action.';
 
@@ -106,7 +132,7 @@ page 75001 "BNO Time Entry Card"
             }
             action("Archive Lines")
             {
-                Caption = 'Archive Time Lines';
+                Caption = 'Archived Time Lines';
                 Image = LinesFromTimesheet;
                 ToolTip = 'Executes the Archive Time Lines action.';
 
@@ -117,8 +143,8 @@ page 75001 "BNO Time Entry Card"
                 begin
                     TimeEntryArchive.FilterGroup(2);
                     TimeEntryArchive.SetRange(User, Rec.User);
-                    TimeEntryArchive.SetRange(Date, Rec.Date);
                     TimeEntryArchive.FilterGroup(0);
+                    TimeEntryArchive.FindLast();
                     TimeEntriesArchive.SetRecord(TimeEntryArchive);
                     TimeEntriesArchive.Run();
                 end;
@@ -128,6 +154,7 @@ page 75001 "BNO Time Entry Card"
         {
             actionref(StartTime_Ref; StartTime) { }
             actionref(Sum_Ref; Sum) { }
+            actionref(EnterTimeEntryLine_Ref; "Enter Time Entry Line") { }
         }
     }
 
@@ -144,20 +171,45 @@ page 75001 "BNO Time Entry Card"
             TimeRegSetup.Modify(false);
         end;
 
-        if not TimeEntry.Get(UserId(), Today()) then begin
-            TimeEntry.Init();
-            TimeEntry.User := Format(UserId());
-            TimeEntry.Date := Today();
-            TimeEntry.Insert(true);
-        end;
-
+        if not TimeEntry.Get(UserId(), Today()) then
+            SetTimeEntry();
         Rec.FilterGroup(2);
         Rec.SetRange(User, UserId());
         Rec.SetRange(Date, Today);
         Rec.FilterGroup(0);
+        Units := TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units;
     end;
 
     var
         TimeRegSetup: Record "BNO TimeReg Setup";
         TimeEntry: Record "BNO Time Entry";
+        Units: Boolean;
+
+    local procedure SetTimeEntry()
+    begin
+        TimeEntry.Init();
+        TimeEntry.User := Format(UserId());
+        TimeEntry.Date := Today();
+        TimeEntry.Insert(true);
+    end;
+
+    local procedure EnterTimeEntryLine()
+    var
+        TimeEntryLine: Record "BNO Time Entry Line";
+        TimeSheet: Page "BNO Time Sheet";
+    begin
+        TimeRegSetup.Get(UserId());
+        TimeEntryLine.SetRange(User, Format(UserId()));
+        TimeEntryLine.SetRange(Date, Today());
+        TimeEntryLine.SetRange(Paused, false);
+        if not TimeEntryLine.FindLast() then begin
+            TimeEntryLine.Init();
+            TimeEntryLine.User := Format(UserId());
+            TimeEntryLine.Date := Today();
+        end;
+
+        TimeSheet.SetRecord(TimeEntryLine);
+        TimeSheet.RunModal();
+        TimeRegSetup.Get(UserId());
+    end;
 }
