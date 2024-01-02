@@ -15,6 +15,12 @@ page 75001 "BNO Time Entry Card"
             usercontrol(TimerControl; "BNO TimerControl")
             {
                 ApplicationArea = All;
+
+                // trigger ControlAddInReady();
+                // begin
+
+                // end;
+
                 trigger NewTimeEntry()
                 begin
                     Message('NewTimeEntry');
@@ -72,6 +78,7 @@ page 75001 "BNO Time Entry Card"
                 Caption = 'Start Time';
                 Image = Start;
                 ToolTip = 'Executes the Start Time action.';
+                Visible = OnPrem;
 
                 trigger OnAction()
                 begin
@@ -83,6 +90,7 @@ page 75001 "BNO Time Entry Card"
                 Caption = 'Stop Time';
                 Image = Stop;
                 ToolTip = 'Executes the Stop Time action.';
+                Visible = OnPrem;
 
                 trigger OnAction()
                 begin
@@ -158,6 +166,14 @@ page 75001 "BNO Time Entry Card"
         }
     }
 
+
+    var
+        TimeRegSetup: Record "BNO TimeReg Setup";
+        TimeEntry: Record "BNO Time Entry";
+        EnvironmentInformation: Codeunit "Environment Information";
+        OnPrem: Boolean;
+        Units: Boolean;
+
     trigger OnOpenPage()
 
     begin
@@ -178,12 +194,8 @@ page 75001 "BNO Time Entry Card"
         Rec.SetRange(Date, Today);
         Rec.FilterGroup(0);
         Units := TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units;
+        OnPrem := not EnvironmentInformation.IsSaaSInfrastructure();
     end;
-
-    var
-        TimeRegSetup: Record "BNO TimeReg Setup";
-        TimeEntry: Record "BNO Time Entry";
-        Units: Boolean;
 
     local procedure SetTimeEntry()
     begin

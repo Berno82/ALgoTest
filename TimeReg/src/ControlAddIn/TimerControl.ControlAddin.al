@@ -16,7 +16,8 @@ controladdin "BNO TimerControl"
 
     procedure StartTime(miliseconds: Integer);
     procedure StopTime();
+    procedure ControlAddInReady();
 
-    event ControlAddInReady();
+    // event ControlAddInReady();
     event NewTimeEntry();
 }

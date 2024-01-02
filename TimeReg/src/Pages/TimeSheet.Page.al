@@ -74,6 +74,7 @@ page 75000 "BNO Time Sheet"
                         TimeRegSetup.Pause := false;
                         TimeRegSetup.Modify();
                     end;
+                    CanClose := true;
                     CurrPage.Close();
                 end;
             }
@@ -92,6 +93,7 @@ page 75000 "BNO Time Sheet"
                     TimeRegSetup."Last Time" := Time();
                     TimeRegSetup.Modify();
 
+                    CanClose := true;
                     CurrPage.Close();
                 end;
             }
@@ -104,7 +106,7 @@ page 75000 "BNO Time Sheet"
         }
     }
     var
-
+        CanClose: Boolean;
         ActivityTxt: Text[2048];
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
@@ -112,6 +114,8 @@ page 75000 "BNO Time Sheet"
         CloseErr: Label 'Can only be closed by using actions';
 
     begin
+        if CanClose then
+            exit(true);
         Message(CloseErr);
         exit(false);
     end;
