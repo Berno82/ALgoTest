@@ -82,7 +82,7 @@ table 75001 "BNO Time Entry Line"
         Rec."Registred Time" := Rec."To Time" - Rec."From Time";
     end;
 
-    procedure InsertTimeEntry(LPause: Boolean; Ldescription: Text[1024])
+    procedure InsertTimeEntry(LPause: Boolean; Ldescription: Text[1024]; ActivityCode: Code[20])
     var
         TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
     begin
@@ -93,7 +93,7 @@ table 75001 "BNO Time Entry Line"
         Rec."From Time" := TimeRegUtillities.GetLastTime();
         Rec.Description := Ldescription;
         Rec.Validate(Paused, LPause);
-        Rec.Activity := Rec.Activity;
+        Rec.Activity := ActivityCode;
         Rec.Insert(true);
     end;
 }

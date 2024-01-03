@@ -2,7 +2,6 @@ page 75001 "BNO Time Entry Card"
 {
     ApplicationArea = All;
     Caption = 'TimeReg';
-    Editable = false;
     DeleteAllowed = false;
     PageType = Card;
     RefreshOnActivate = true;
@@ -19,10 +18,11 @@ page 75001 "BNO Time Entry Card"
 
                 trigger NewTimeEntry()
                 begin
-                    CurrPage.TimerControl.StopTime();
-                    EnterTimeEntryLine();
+                    StopTime();
+                    if (Time() - TimeRegUtillities.GetLastTime()) > TimeRegSetup."Wait Time" then
+                        EnterTimeEntryLine();
                     if not TimeRegSetup.Pause then
-                        CurrPage.TimerControl.StartTime(TimeRegSetup."Wait Time");
+                        StartTime();
                 end;
             }
 
@@ -37,6 +37,7 @@ page 75001 "BNO Time Entry Card"
                 }
                 field("Date"; Rec."Date")
                 {
+
                     ToolTip = 'Specifies the value of the Date field.';
                 }
 
@@ -60,6 +61,7 @@ page 75001 "BNO Time Entry Card"
                 ApplicationArea = All;
                 SubPageLink = User = field(User),
                                 Date = field(Date);
+
             }
         }
     }
@@ -68,7 +70,7 @@ page 75001 "BNO Time Entry Card"
     {
         area(Processing)
         {
-            action(StartTime)
+            action("StartTime Action")
             {
 
                 Caption = 'Start Time';
@@ -79,7 +81,7 @@ page 75001 "BNO Time Entry Card"
                 begin
                     if TimeRegSetup.Pause then
                         TimeRegUtillities.SetLastTime(Time(), false);
-                    CurrPage.TimerControl.StartTime(TimeRegSetup."Wait Time");
+                    StartTime();
                 end;
             }
             action(Pause)
@@ -91,7 +93,7 @@ page 75001 "BNO Time Entry Card"
                 trigger OnAction()
                 begin
                     TimeRegUtillities.SetLastTime(TimeRegUtillities.GetLastTime(), true);
-                    CurrPage.TimerControl.StopTime();
+                    StopTime();
                 end;
             }
             action("UnPause Action")
@@ -104,9 +106,10 @@ page 75001 "BNO Time Entry Card"
 
                 begin
                     Unpause();
+
                 end;
             }
-            action(StopTime)
+            action("StopTime Action")
             {
                 Caption = 'Stop Time';
                 Image = Stop;
@@ -114,7 +117,7 @@ page 75001 "BNO Time Entry Card"
 
                 trigger OnAction()
                 begin
-                    CurrPage.TimerControl.StopTime();
+                    StopTime();
                 end;
             }
             action("Enter Time Entry Line")
@@ -176,10 +179,11 @@ page 75001 "BNO Time Entry Card"
                     TimeEntriesArchive.Run();
                 end;
             }
+
         }
         area(Promoted)
         {
-            actionref(StartTime_Ref; StartTime) { }
+            actionref(StartTime_Ref; "StartTime Action") { }
             actionref(Sum_Ref; Sum) { }
             actionref(EnterTimeEntryLine_Ref; "Enter Time Entry Line") { }
             actionref(Unpause_Ref; "UnPause Action") { }
@@ -203,6 +207,7 @@ page 75001 "BNO Time Entry Card"
         Rec.SetRange(Date, Today);
         Rec.FilterGroup(0);
         Units := TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units;
+
     end;
 
     local procedure SetTimeEntry()
@@ -245,7 +250,6 @@ page 75001 "BNO Time Entry Card"
 
         TimeSheet.SetRecord(TimeEntryLine);
         TimeSheet.RunModal();
-        TimeRegSetup.Get(UserId());
     end;
 
     local procedure Unpause()
@@ -254,9 +258,20 @@ page 75001 "BNO Time Entry Card"
     begin
         TimeRegSetup.Get(UserId());
         if TimeRegSetup.Pause then begin
-            TimeEntryLine.InsertTimeEntry(TimeRegSetup.Pause, '');
-
+            TimeEntryLine.InsertTimeEntry(TimeRegSetup.Pause, '', '');
             TimeRegUtillities.SetLastTime(TimeEntryLine."To Time", false);
+            StartTime();
         end;
+    end;
+
+    local procedure StartTime()
+    begin
+        TimeRegSetup.Get(UserId());
+        CurrPage.TimerControl.StartTime(TimeRegSetup."Wait Time");
+    end;
+
+    local procedure StopTime()
+    begin
+        CurrPage.TimerControl.StopTime();
     end;
 }

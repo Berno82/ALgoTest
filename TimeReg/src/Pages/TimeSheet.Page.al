@@ -26,11 +26,8 @@ page 75000 "BNO Time Sheet"
                     ToolTip = 'Specifies the value of the Activity field.';
 
                     trigger OnValidate()
-                    var
-                        Activity: Record "BNO Activity";
                     begin
-                        if Activity.Get(Rec.User, Rec.Activity) then
-                            ActivityTxt := Activity.Description;
+                        SetActivityText();
                     end;
                 }
                 field(ActivityDescription; ActivityTxt)
@@ -56,7 +53,7 @@ page 75000 "BNO Time Sheet"
 
                 trigger OnAction()
                 begin
-                    CreateTimeEntry(false, Rec.Description);
+                    CreateTimeEntry(false, Rec.Description, Rec.Activity);
                 end;
             }
             action(Pause)
@@ -88,8 +85,8 @@ page 75000 "BNO Time Sheet"
     }
     var
         TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
-        CanClose: Boolean;
         ActivityTxt: Text[2048];
+        CanClose: Boolean;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
@@ -106,14 +103,15 @@ page 75000 "BNO Time Sheet"
     begin
         Rec := TempTimeEntryLine;
         Rec.Insert();
+        SetActivityText();
     end;
 
-    local procedure CreateTimeEntry(LPause: Boolean; Ldescription: Text[1024])
+    local procedure CreateTimeEntry(LPause: Boolean; Ldescription: Text[1024]; ActivityCode: Code[20])
     var
         TimeEntryLine: Record "BNO Time Entry Line";
 
     begin
-        TimeEntryLine.InsertTimeEntry(LPause, Ldescription);
+        TimeEntryLine.InsertTimeEntry(LPause, Ldescription, ActivityCode);
 
         if LPause then
             PauseTime(TimeEntryLine."To Time");
@@ -128,5 +126,13 @@ page 75000 "BNO Time Sheet"
         TimeRegSetup.Get(UserId());
         if TimeRegSetup.Pause then
             TimeRegUtillities.SetLastTime(ToTime, false);
+    end;
+
+    local procedure SetActivityText()
+    var
+        Activity: Record "BNO Activity";
+    begin
+        if Activity.Get(Rec.User, Rec.Activity) then
+            ActivityTxt := Activity.Description;
     end;
 }
