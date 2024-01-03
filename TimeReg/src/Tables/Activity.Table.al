@@ -26,6 +26,10 @@ table 75005 "BNO Activity"
         }
     }
 
+    fieldgroups
+    {
+        fieldgroup(DropDown; "No.", Description) { }
+    }
     trigger OnInsert()
     begin
         Rec."User Name" := Format(UserId());

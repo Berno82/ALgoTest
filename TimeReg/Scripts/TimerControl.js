@@ -3,6 +3,11 @@ var timerObject;
 
 Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('ControlAddInReady');
 
+
+function initializeControlAddIn() {
+    Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('ControlAddInReady');
+}
+
 function StartTime(milliSeconds) {
     timerObject = window.setInterval(TimerAction, milliSeconds);
 }

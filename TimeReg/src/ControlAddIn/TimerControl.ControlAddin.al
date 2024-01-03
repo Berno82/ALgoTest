@@ -4,6 +4,7 @@
 controladdin "BNO TimerControl"
 {
     Scripts = 'Scripts/TimerControl.js';
+    StartupScript = 'Scripts/TimerControl.js';
 
     HorizontalShrink = true;
     HorizontalStretch = true;
@@ -16,8 +17,7 @@ controladdin "BNO TimerControl"
 
     procedure StartTime(miliseconds: Integer);
     procedure StopTime();
-    procedure ControlAddInReady();
 
-    // event ControlAddInReady();
+    ///<summary>Triggers a new time entry</summary>
     event NewTimeEntry();
 }

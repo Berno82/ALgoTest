@@ -55,27 +55,8 @@ page 75000 "BNO Time Sheet"
                 ToolTip = 'Executes the Create Time Entry action.';
 
                 trigger OnAction()
-                var
-                    TimeEntryLine: Record "BNO Time Entry Line";
-                    TimeRegSetup: Record "BNO TimeReg Setup";
-                    TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
                 begin
-                    TimeEntryLine.Init();
-                    TimeEntryLine.Date := Today();
-                    TimeEntryLine."To Time" := Time();
-                    TimeEntryLine.User := Format(UserId());
-                    TimeEntryLine."From Time" := TimeRegUtillities.GetLastTime(Rec.User);
-                    TimeEntryLine.Description := Rec.Description;
-                    TimeEntryLine.Activity := Rec.Activity;
-                    TimeEntryLine.Insert(true);
-
-                    TimeRegSetup.Get(UserId());
-                    if TimeRegSetup.Pause then begin
-                        TimeRegSetup.Pause := false;
-                        TimeRegSetup.Modify();
-                    end;
-                    CanClose := true;
-                    CurrPage.Close();
+                    CreateTimeEntry(false, Rec.Description);
                 end;
             }
             action(Pause)
@@ -86,12 +67,12 @@ page 75000 "BNO Time Sheet"
 
                 trigger OnAction()
                 var
-                    TimeRegSetup: Record "BNO TimeReg Setup";
+                    TimeEntryLine: Record "BNO Time Entry Line";
                 begin
-                    TimeRegSetup.Get(UserId());
-                    TimeRegSetup.Pause := true;
-                    TimeRegSetup."Last Time" := Time();
-                    TimeRegSetup.Modify();
+                    TimeEntryLine.SetRange(User, Rec.User);
+                    TimeEntryLine.SetRange(Date, Today());
+                    if TimeEntryLine.FindLast() then
+                        TimeRegUtillities.SetLastTime(TimeEntryLine."To Time", true);
 
                     CanClose := true;
                     CurrPage.Close();
@@ -106,6 +87,7 @@ page 75000 "BNO Time Sheet"
         }
     }
     var
+        TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
         CanClose: Boolean;
         ActivityTxt: Text[2048];
 
@@ -124,5 +106,27 @@ page 75000 "BNO Time Sheet"
     begin
         Rec := TempTimeEntryLine;
         Rec.Insert();
+    end;
+
+    local procedure CreateTimeEntry(LPause: Boolean; Ldescription: Text[1024])
+    var
+        TimeEntryLine: Record "BNO Time Entry Line";
+
+    begin
+        TimeEntryLine.InsertTimeEntry(LPause, Ldescription);
+
+        if LPause then
+            PauseTime(TimeEntryLine."To Time");
+        CanClose := true;
+        CurrPage.Close();
+    end;
+
+    local procedure PauseTime(ToTime: Time)
+    var
+        TimeRegSetup: Record "BNO TimeReg Setup";
+    begin
+        TimeRegSetup.Get(UserId());
+        if TimeRegSetup.Pause then
+            TimeRegUtillities.SetLastTime(ToTime, false);
     end;
 }

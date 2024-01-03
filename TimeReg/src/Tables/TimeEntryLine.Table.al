@@ -1,6 +1,6 @@
 table 75001 "BNO Time Entry Line"
 {
-    Caption = 'BNO Time Entry Line';
+    Caption = 'Time Entry Line';
     DataClassification = CustomerContent;
 
     fields
@@ -48,6 +48,12 @@ table 75001 "BNO Time Entry Line"
         field(10; Paused; Boolean)
         {
             Caption = 'Paused';
+
+            trigger OnValidate()
+            begin
+                if Rec.Paused then
+                    Rec.Description := 'Pause';
+            end;
         }
 
     }
@@ -74,5 +80,20 @@ table 75001 "BNO Time Entry Line"
         Hours := (Rec."To Time" - Rec."From Time") / 6000000 * (100 / 60);
 
         Rec."Registred Time" := Rec."To Time" - Rec."From Time";
+    end;
+
+    procedure InsertTimeEntry(LPause: Boolean; Ldescription: Text[1024])
+    var
+        TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
+    begin
+        Rec.Init();
+        Rec.Date := Today();
+        Rec."To Time" := Time();
+        Rec.User := Format(UserId());
+        Rec."From Time" := TimeRegUtillities.GetLastTime();
+        Rec.Description := Ldescription;
+        Rec.Validate(Paused, LPause);
+        Rec.Activity := Rec.Activity;
+        Rec.Insert(true);
     end;
 }

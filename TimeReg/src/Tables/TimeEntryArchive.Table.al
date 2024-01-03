@@ -17,7 +17,7 @@ table 75003 "BNO Time Entry Archive"
         {
             Caption = 'Accumulated Time';
             FieldClass = FlowField;
-            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Date = field(Date)));
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Date = field(Date), User = field(User), Paused = const(false)));
 
         }
         field(4; Sorted; Boolean)
@@ -28,7 +28,7 @@ table 75003 "BNO Time Entry Archive"
         {
             Caption = 'Accumulated Time';
             FieldClass = FlowField;
-            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Date = field(Date)));
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Date = field(Date), User = field(User), Paused = const(false)));
 
         }
     }

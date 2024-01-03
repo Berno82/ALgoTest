@@ -1,7 +1,7 @@
 page 75005 "BNO Time Entries Archive"
 {
     ApplicationArea = All;
-    Caption = 'BNO Time Entries Archive';
+    Caption = 'Time Entries Archive';
     PageType = Card;
     SourceTable = "BNO Time Entry Archive";
     UsageCategory = Lists;
@@ -44,7 +44,7 @@ page 75005 "BNO Time Entries Archive"
             }
             part("Sorted Lines"; "BNO Sorted Lines")
             {
-                Caption = 'Sorted TimeReg Lines';
+                Caption = 'Sorted Lines';
                 SubPageLink = Date = field(Date),
                             User = field(User);
                 Visible = not VisibleSum and Rec.Sorted;

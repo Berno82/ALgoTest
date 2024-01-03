@@ -1,6 +1,6 @@
 table 75006 "BNO Time Entry Line Sorted"
 {
-    Caption = 'BNO Time Entry Line';
+    Caption = 'Time Entry Line Sorted';
     DataClassification = CustomerContent;
 
     fields
@@ -43,6 +43,10 @@ table 75006 "BNO Time Entry Line Sorted"
         field(9; Activity; Code[20])
         {
             Caption = 'Activity';
+        }
+        field(10; Paused; Boolean)
+        {
+            Caption = 'Paused';
         }
     }
     keys

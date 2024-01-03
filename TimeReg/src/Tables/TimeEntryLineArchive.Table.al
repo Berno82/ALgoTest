@@ -1,6 +1,6 @@
 table 75004 "BNO Time Entry Line Archive"
 {
-    Caption = 'BNO Time Entry Line';
+    Caption = 'Time Entry Line Archive';
     DataClassification = CustomerContent;
 
     fields
@@ -42,6 +42,11 @@ table 75004 "BNO Time Entry Line Archive"
         {
             Caption = 'Activity';
         }
+        field(10; Paused; Boolean)
+        {
+            Caption = 'Paused';
+        }
+
     }
     keys
     {

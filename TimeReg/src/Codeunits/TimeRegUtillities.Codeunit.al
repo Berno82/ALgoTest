@@ -1,22 +1,30 @@
 codeunit 75000 "BNO TimeReg Utillities"
 {
     ///<summary>Get the last time registered for user</summary>
-    procedure GetLastTime(UserName: Text[100]) LastTime: Time
+    procedure GetLastTime() LastTime: Time
     var
         TimeEntryLine: Record "BNO Time Entry Line";
         TimeRegSetup: Record "BNO TimeReg Setup";
     begin
-        TimeRegSetup.Get(UserName);
+        TimeRegSetup.Get(UserId());
         if not TimeRegSetup.Pause then begin
-            TimeEntryLine.SetRange(User, UserName);
+            TimeEntryLine.SetRange(User, UserId());
             TimeEntryLine.SetRange(Date, Today());
             if TimeEntryLine.FindLast() then
-                LastTime := TimeEntryLine."To Time"
-            else
-                LastTime := TimeRegSetup."Last Time";
+                LastTime := TimeEntryLine."To Time";
         end else
             LastTime := TimeRegSetup."Last Time";
 
+    end;
+
+    procedure SetLastTime(LastTime: Time; Pause: Boolean)
+    var
+        TimeRegSetup: Record "BNO TimeReg Setup";
+    begin
+        TimeRegSetup.Get(UserId());
+        TimeRegSetup.Pause := Pause;
+        TimeRegSetup."Last Time" := Time();
+        TimeRegSetup.Modify();
     end;
 
     ///<summary>Archive entries</summary>
@@ -27,19 +35,23 @@ codeunit 75000 "BNO TimeReg Utillities"
         TimeEntryLine: Record "BNO Time Entry Line";
         TimeEntryLineArchive: Record "BNO Time Entry Line Archive";
     begin
-        if TimeEntry.FindSet() then
-            repeat
-                TimeEntryArchive.Init();
-                TimeEntryArchive.TransferFields(TimeEntry);
-                TimeEntryArchive.Insert(true);
-            until TimeEntry.Next() = 0;
+        TimeEntry.SetFilter(Date, '..%1', Today() - 1);
+        if not TimeEntry.IsEmpty then begin
+            if TimeEntry.FindSet() then
+                repeat
+                    TimeEntryArchive.Init();
+                    TimeEntryArchive.TransferFields(TimeEntry);
+                    TimeEntryArchive.Insert(true);
+                until TimeEntry.Next() = 0;
 
-        if TimeEntryLine.FindSet() then
-            repeat
-                TimeEntryLineArchive.Init();
-                TimeEntryLineArchive.TransferFields(TimeEntryLine);
-                TimeEntryLineArchive.Insert(true)
-            until TimeEntryLine.Next() = 0;
+            if not TimeEntryLine.IsEmpty then
+                if TimeEntryLine.FindSet() then
+                    repeat
+                        TimeEntryLineArchive.Init();
+                        TimeEntryLineArchive.TransferFields(TimeEntryLine);
+                        TimeEntryLineArchive.Insert(true)
+                    until TimeEntryLine.Next() = 0;
+        end;
     end;
 
     procedure SumLines(UserName: Text[100]; Date: Date)
@@ -84,6 +96,24 @@ codeunit 75000 "BNO TimeReg Utillities"
             until TimeEntryLineArchive.Next() = 0;
 
         end;
+        TimeEntryLineArchive.SetRange(Paused, true);
+        if TimeEntryLineArchive.FindSet() then begin
+            TimeEntryLineSorted.SetRange(Paused, true);
+            repeat
+                if TimeEntryLineSorted.IsEmpty() then begin
+                    TimeEntryLineSorted.Init();
+                    TimeEntryLineSorted.TransferFields(TimeEntryLineArchive);
+                    TimeEntryLineSorted.Description := 'Pause';
+                    TimeEntryLineSorted.Insert();
+                end else begin
+                    TimeEntryLineSorted.FindFirst();
+                    TimeEntryLineSorted."Registred Time" += TimeEntryLineArchive."Registred Time";
+                    TimeEntryLineSorted."Registred Time Units" += TimeEntryLineArchive."Registred Time Units";
+                    TimeEntryLineSorted.Modify();
+                end;
+            until TimeEntryLineArchive.Next() = 0;
+        end;
+
         TimeEntryArchive.Get(UserName, Date);
         TimeEntryArchive.Sorted := true;
         TimeEntryArchive.Modify();
@@ -111,10 +141,12 @@ codeunit 75000 "BNO TimeReg Utillities"
                 TempTimeEntryLineArchive.Insert();
             until TimeEntryLine.Next() = 0;
 
+            TimeEntryLine.SetRange(Paused, false);
             TimeEntryLine.FindSet();
             repeat
                 TempTimeEntryLineArchive.SetRange(Activity, TimeEntryLine.Activity);
                 TempTimeEntryLineArchive.SetRange(Description, TimeEntryLine.Description);
+                TempTimeEntryLineArchive.SetRange(Paused, false);
                 if not TempTimeEntryLineArchive.IsEmpty then begin
                     TempTimeEntryLineArchive.FindSet();
                     TempTimeEntryLineSorted.Init();
@@ -133,9 +165,27 @@ codeunit 75000 "BNO TimeReg Utillities"
                 end;
             until TimeEntryLine.Next() = 0;
 
+            TempTimeEntryLineArchive.SetRange(Activity);
+            TempTimeEntryLineArchive.SetRange(Description);
+            TempTimeEntryLineArchive.SetRange(Paused, true);
+            if TempTimeEntryLineArchive.FindSet() then begin
+                TempTimeEntryLineSorted.FindLast();
+                TempTimeEntryLineSorted.SetRange(Paused, true);
+                repeat
+                    if TempTimeEntryLineSorted.IsEmpty() then begin
+                        TempTimeEntryLineSorted.Init();
+                        TempTimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
+                        TempTimeEntryLineSorted.Description := 'Pause';
+                        TempTimeEntryLineSorted.Insert();
+                    end else begin
+                        TempTimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
+                        TempTimeEntryLineSorted."Registred Time Units" += TempTimeEntryLineArchive."Registred Time Units";
+                        TempTimeEntryLineSorted.Modify();
+                    end;
+                until TempTimeEntryLineArchive.Next() = 0;
+                TempTimeEntryLineSorted.SetRange(Paused);
+            end;
             Page.Run(Page::"BNO Sorted Lines", TempTimeEntryLineSorted);
-
         end;
-
     end;
 }
