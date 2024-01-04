@@ -31,6 +31,18 @@ table 75003 "BNO Time Entry Archive"
             CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Date = field(Date), User = field(User), Paused = const(false)));
 
         }
+        field(6; "Pause Units"; Decimal)
+        {
+            Caption = 'Pause Units';
+            FieldClass = FlowField;
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Date = field(Date), User = field(User), Paused = const(true)));
+        }
+        field(7; Pause; Duration)
+        {
+            Caption = 'Pause';
+            FieldClass = FlowField;
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Date = field(Date), User = field(User), Paused = const(true)));
+        }
     }
     keys
     {

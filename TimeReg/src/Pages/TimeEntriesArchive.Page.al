@@ -34,6 +34,18 @@ page 75005 "BNO Time Entries Archive"
                     Visible = Units;
                     ToolTip = 'Specifies the value of the Accumulated Time Units field.';
                 }
+                field(Pause; Rec.Pause)
+                {
+                    Editable = false;
+                    Visible = not Units;
+                    ToolTip = 'Specifies the value of the Pause field.';
+                }
+                field("Pause Units"; Rec."Pause Units")
+                {
+                    Editable = false;
+                    Visible = Units;
+                    ToolTip = 'Specifies the value of the Pause Units field.';
+                }
             }
             part("Archive Lines"; "BNO Time Entry Archive Lines")
             {

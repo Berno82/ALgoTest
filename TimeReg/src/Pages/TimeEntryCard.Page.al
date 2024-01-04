@@ -61,7 +61,6 @@ page 75001 "BNO Time Entry Card"
                 ApplicationArea = All;
                 SubPageLink = User = field(User),
                                 Date = field(Date);
-
             }
         }
     }
@@ -227,9 +226,12 @@ page 75001 "BNO Time Entry Card"
         if not TimeRegSetup.Get(UserId()) then begin
             TimeRegSetup.Init();
             TimeRegSetup.User := Format(UserId());
-            if TimeRegSetup."Last Time" > Time() then
-                TimeRegSetup."Last Time" := Time();
+            TimeRegSetup."Last Time" := Time();
             TimeRegSetup.Insert();
+        end;
+        if TimeRegSetup."Last Time" > Time() then begin
+            TimeRegSetup."Last Time" := Time();
+            TimeRegSetup.Modify();
         end;
     end;
 
