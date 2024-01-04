@@ -11,7 +11,9 @@ codeunit 75000 "BNO TimeReg Utillities"
             TimeEntryLine.SetRange(User, UserId());
             TimeEntryLine.SetRange(Date, Today());
             if TimeEntryLine.FindLast() then
-                LastTime := TimeEntryLine."To Time";
+                LastTime := TimeEntryLine."To Time"
+            else
+                LastTime := TimeRegSetup."Last Time";
         end else
             LastTime := TimeRegSetup."Last Time";
 
