@@ -143,6 +143,17 @@ page 75001 "BNO Time Entry Card"
                     TimeRegUtillities.SumCurrentLines(Rec.User, Rec.Date);
                 end;
             }
+            // action(GenerateCopilot)
+            // {
+            //     Caption = 'Generate Copilot';
+            //     Image = Sparkle;
+            //     ToolTip = 'Executes the Generate Copilot action.';
+
+            //     trigger OnAction()
+            //     begin
+            //         Page.RunModal(Page::"BNO Generate Time Entry Line");
+            //     end;
+            // }
         }
         area(Navigation)
         {

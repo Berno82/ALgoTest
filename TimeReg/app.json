@@ -8,7 +8,7 @@
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "22.0.0.0",
+  "application": "23.0.0.0",
   "idRanges": [
     {
       "from": 75000,
@@ -24,5 +24,5 @@
     "includeSourceInSymbolFile": false
   },
   "target": "Cloud",
-  "runtime": "11.1"
+  "runtime": "12.1"
 }

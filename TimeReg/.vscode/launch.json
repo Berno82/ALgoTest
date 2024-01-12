@@ -13,6 +13,22 @@
             "tenant": "default",
             "authentication": "UserPassword",
             "schemaUpdateMode": "ForceSync"
+        },
+        {
+            "name": "TimeReg Sanbox",
+            "type": "al",
+            "request": "launch",
+            "environmentType": "Sandbox",
+            "environmentName": "TimeReg",
+            "tenant": "fe2a2437-0644-4e42-b862-b62a6f80f130",
+            "startupObjectId": 75001,
+            "breakOnError": "All",
+            "breakOnRecordWrite": "None",
+            "launchBrowser": true,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10
         }
     ]
 }

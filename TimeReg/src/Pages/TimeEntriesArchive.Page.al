@@ -106,8 +106,8 @@ page 75005 "BNO Time Entries Archive"
     }
 
     var
-        TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
         TimeRegSetup: Record "BNO TimeReg Setup";
+        TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
         Units: Boolean;
         VisibleSum: Boolean;
 

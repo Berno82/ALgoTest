@@ -17,6 +17,42 @@ table 75005 "BNO Activity"
         {
             Caption = 'Description';
         }
+        field(4; "Calculate Consumption"; Boolean)
+        {
+            Caption = 'Calculate Consumption';
+        }
+        field(5; "Allowed Time Consumption"; Decimal)
+        {
+            Caption = 'Allowed Time Consumption';
+
+            trigger OnValidate()
+            begin
+                if "Allowed Time Consumption" <> 0 then
+                "Calculate Consumption" := true;
+            end;
+        }
+        field(6; "Allowed Time Units Consumption"; Decimal)
+        {
+            Caption = 'Allowed Time Consumption';
+            trigger OnValidate()
+            begin
+                if "Allowed Time Units Consumption" <> 0 then
+                "Calculate Consumption" := true;
+            end;
+        }
+
+        field(7; "Time Units Consumption"; Decimal)
+        {
+            Caption = 'Time Consumption';
+            FieldClass = FlowField;
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Activity = field("No.")));
+        }
+        field(8; "Time Consumption"; Decimal)
+        {
+            Caption = 'Time Consumption';
+            FieldClass = FlowField;
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Activity = field("No.")));
+        }
     }
     keys
     {

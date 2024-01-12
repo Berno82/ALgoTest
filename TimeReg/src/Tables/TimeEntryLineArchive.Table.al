@@ -54,6 +54,11 @@ table 75004 "BNO Time Entry Line Archive"
         {
             Clustered = true;
         }
+        key(Key1; User, Activity)
+        {
+            SumIndexFields = "Registred Time", "Registred Time Units";
+            MaintainSiftIndex = false;
+        }
     }
 
     trigger OnInsert()

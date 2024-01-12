@@ -130,9 +130,9 @@ page 75000 "BNO Time Sheet"
 
     local procedure SetActivityText()
     var
-        Activity: Record "BNO Activity";
+        ActivityRecord: Record "BNO Activity";
     begin
-        if Activity.Get(Rec.User, Rec.Activity) then
-            ActivityTxt := Activity.Description;
+        if ActivityRecord.Get(Rec.User, Rec.Activity) then
+            ActivityTxt := ActivityRecord.Description;
     end;
 }
