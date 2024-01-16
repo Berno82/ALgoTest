@@ -35,32 +35,32 @@ page 75002 "BNO Time Entry Lines"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Activity field.';
                 }
-                field(TimeConsumptionStatus; TimeConsumptionStatus)
+                field("Remaining Time"; Rec."Remaining Time")
                 {
                     ApplicationArea = All;
-                    Caption = 'Time Consumption Status';
-                    ToolTip = 'Specifies the value of the Time Consumed field.';
+                    Editable = false;
+                    ToolTip = 'Specifies the value of the Remaining Time field.';
+                    Visible = not Units;
+                }
+                field("Remaining Time Units"; Rec."Remaining Time Units")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    ToolTip = 'Specifies the value of the Remaining Time Units field.';
+                    Visible = Units;
                 }
             }
         }
     }
     var
-        TimeConsumptionStatus: Decimal;
+        Units: Boolean;
 
-    trigger OnAfterGetRecord()
+    trigger OnOpenPage();
     var
-        ActivityRecord: Record "BNO Activity";
         TimeRegSetup: Record "BNO TimeReg Setup";
     begin
         TimeRegSetup.Get();
-        ActivityRecord.Get(Rec.Activity);
-        ActivityRecord.CalcFields("Time Consumption", "Time Units Consumption");
-        if ActivityRecord."Calculate Consumption" then
-            case TimeRegSetup."Unit of Measure" of
-                TimeRegSetup."Unit of Measure"::Hours:
-                    TimeConsumptionStatus := ActivityRecord."Allowed Time Consumption" - ActivityRecord."Time Consumption";
-                TimeRegSetup."Unit of Measure"::Units:
-                    TimeConsumptionStatus := ActivityRecord."Allowed Time Units Consumption" - ActivityRecord."Time Units Consumption";
-            end;
+        if TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units then
+            Units := true;
     end;
 }

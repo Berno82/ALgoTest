@@ -43,10 +43,23 @@ table 75006 "BNO Time Entry Line Sorted"
         field(9; Activity; Code[20])
         {
             Caption = 'Activity';
+            TableRelation = "BNO Activity"."No." where("User Name" = FIELD(User));
         }
         field(10; Paused; Boolean)
         {
             Caption = 'Paused';
+        }
+        field(11; "Remaining Time"; Duration)
+        {
+            Caption = 'Remaining Time';
+            FieldClass = FlowField;
+            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User Name" = field(User), "No." = field(Activity)));
+        }
+        field(12; "Remaining Time Units"; Decimal)
+        {
+            Caption = 'Remaining Time';
+            FieldClass = FlowField;
+            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
         }
     }
     keys
@@ -54,6 +67,11 @@ table 75006 "BNO Time Entry Line Sorted"
         key(PK; User, Date, "Entry No.")
         {
             Clustered = true;
+        }
+        key(Key1; User, Activity)
+        {
+            SumIndexFields = "Registred Time", "Registred Time Units";
+            MaintainSiftIndex = false;
         }
     }
 
@@ -64,5 +82,28 @@ table 75006 "BNO Time Entry Line Sorted"
         TimeEntryArchive.Get(Rec.User, Rec.Date);
         TimeEntryArchive.Sorted := true;
         TimeEntryArchive.Modify();
+
+        // CalcTimeRemaning();
     end;
+
+    // local procedure CalcTimeRemaning()
+    // var
+    //     PActivity: Record "BNO Activity";
+    // // TimeRegSetup: Record "BNO TimeReg Setup";
+    // begin
+    //     if Rec.Activity <> '' then begin
+    //         PActivity.Get(Rec.User, Rec.Activity);
+    //         if PActivity."Calculate Consumption" then begin
+    //             // TimeRegSetup.Get();
+    //             // PActivity.CalcFields("Time Consumption", "Time Units Consumption");
+    //             // case TimeRegSetup."Unit of Measure" of
+    //             //     TimeRegSetup."Unit of Measure"::Hours:
+    //             //         Rec."remaining Time" := PActivity."Allowed Time Consumption" - PActivity."Time Consumption";
+    //             //     TimeRegSetup."Unit of Measure"::Units:
+    //             //         Rec."remaining Time" := PActivity."Allowed Time Units Consumption" - PActivity."Time Units Consumption";
+    //             // end;
+    //             PActivity.CalcRemainingTime(PActivity);
+    //         end;
+    //     end;
+    // end;
 }

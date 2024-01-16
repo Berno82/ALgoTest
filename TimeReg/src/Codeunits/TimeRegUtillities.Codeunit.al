@@ -38,21 +38,29 @@ codeunit 75000 "BNO TimeReg Utillities"
         TimeEntryLineArchive: Record "BNO Time Entry Line Archive";
     begin
         TimeEntry.SetFilter(Date, '..%1', Today() - 1);
-        if not TimeEntry.IsEmpty then begin
-            if TimeEntry.FindSet() then
+        TimeEntryLine.SetFilter(Date, '..%1', Today() - 1);
+        if TimeEntry.FindSet() then begin
+            if not TimeEntry.IsEmpty() then
                 repeat
-                    TimeEntryArchive.Init();
-                    TimeEntryArchive.TransferFields(TimeEntry);
-                    TimeEntryArchive.Insert(true);
+                    TimeEntryArchive.SetRange(User, TimeEntry.User);
+                    TimeEntryArchive.SetRange(Date, TimeEntry.Date);
+                    if TimeEntryArchive.IsEmpty() then begin
+                        TimeEntryArchive.Init();
+                        TimeEntryArchive.TransferFields(TimeEntry);
+                        TimeEntryArchive.Insert(true);
+                    end;
+                    TimeEntryLine.SetRange(User, TimeEntry.User);
+                    TimeEntryLine.SetRange(Date, TimeEntry.Date);
+                    if not TimeEntryLine.IsEmpty() then
+                        if TimeEntryLine.FindSet() then
+                            repeat
+                                TimeEntryLineArchive.Init();
+                                TimeEntryLineArchive.TransferFields(TimeEntryLine);
+                                if not TimeEntryLineArchive.Insert(true) then
+                                    TimeEntryLineArchive.Modify();
+                            until TimeEntryLine.Next() = 0;
                 until TimeEntry.Next() = 0;
-
-            if not TimeEntryLine.IsEmpty then
-                if TimeEntryLine.FindSet() then
-                    repeat
-                        TimeEntryLineArchive.Init();
-                        TimeEntryLineArchive.TransferFields(TimeEntryLine);
-                        TimeEntryLineArchive.Insert(true)
-                    until TimeEntryLine.Next() = 0;
+            TimeEntry.DeleteAll(true);
         end;
     end;
 
@@ -96,6 +104,7 @@ codeunit 75000 "BNO TimeReg Utillities"
                     TempTimeEntryLineArchive.DeleteAll();
                 end;
             until TimeEntryLineArchive.Next() = 0;
+            UpdateConsumedTime(UserName, Date);
 
         end;
         TimeEntryLineArchive.SetRange(Paused, true);
@@ -127,6 +136,7 @@ codeunit 75000 "BNO TimeReg Utillities"
         TempTimeEntryLineArchive: Record "BNO Time Entry Line Archive" temporary;
         TempTimeEntryLineSorted: Record "BNO Time Entry Line Sorted" temporary;
         TimeEntryLine: Record "BNO Time Entry Line";
+        // PActivity: Record "BNO Activity";
         NoLinesErr: Label 'No Time entry lines found';
     begin
 
@@ -153,6 +163,13 @@ codeunit 75000 "BNO TimeReg Utillities"
                     TempTimeEntryLineArchive.FindSet();
                     TempTimeEntryLineSorted.Init();
                     TempTimeEntryLineSorted.TransferFields(TempTimeEntryLineArchive);
+                    // if PActivity.Get(UserName, TempTimeEntryLineSorted.Activity) then
+                    //     if PActivity."Calculate Consumption" then begin
+                    //         PActivity.CalcRemainingTime(PActivity);
+                    //         // PActivity.CalcFields("Time Consumption", "Time Units Consumption");
+                    //         // TempTimeEntryLineSorted."Remaining Time" := PActivity."Allowed Time Consumption" - PActivity."Time Consumption";
+                    //         // TempTimeEntryLineSorted."Remaining Time Units" := PActivity."Allowed Time Units Consumption" - PActivity."Time Units Consumption";
+                    //     end;
                     TempTimeEntryLineSorted.Insert();
                     if TempTimeEntryLineArchive.Count > 1 then begin
                         TempTimeEntryLineArchive.FindSet();
@@ -160,6 +177,10 @@ codeunit 75000 "BNO TimeReg Utillities"
                         repeat
                             TempTimeEntryLineSorted."Registred Time" += TempTimeEntryLineArchive."Registred Time";
                             TempTimeEntryLineSorted."Registred Time Units" += TempTimeEntryLineArchive."Registred Time Units";
+                            // if PActivity."Calculate Consumption" then begin
+                            //     TempTimeEntryLineSorted."Remaining Time" -= TempTimeEntryLineArchive."Registred Time";
+                            //     TempTimeEntryLineSorted."Remaining Time Units" -= TempTimeEntryLineArchive."Registred Time Units";
+                            // end;
                             TempTimeEntryLineSorted.Modify();
                         until TempTimeEntryLineArchive.Next() = 0;
                     end;
@@ -189,5 +210,26 @@ codeunit 75000 "BNO TimeReg Utillities"
             end;
             Page.Run(Page::"BNO Sorted Lines", TempTimeEntryLineSorted);
         end;
+    end;
+
+    local procedure UpdateConsumedTime(UserName: Text[100]; Date: Date)
+    var
+        TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
+        Pactivity: Record "BNO Activity";
+    begin
+        TimeEntryLineSorted.SetRange(User, UserName);
+        TimeEntryLineSorted.SetRange(Date, Date);
+        if TimeEntryLineSorted.FindSet() then
+            repeat
+                Pactivity.Get(TimeEntryLineSorted.User, TimeEntryLineSorted.Activity);
+                if TimeEntryLineSorted.Activity <> '' then
+                    if Pactivity."Calculate Consumption" then begin
+                        TimeEntryLineSorted."Remaining Time" := Pactivity."Allowed Time Consumption" - Pactivity."Time Consumption";
+                        TimeEntryLineSorted."Remaining Time Units" := Pactivity."Allowed Time Units Consumption" - Pactivity."Time Units Consumption";
+                        TimeEntryLineSorted.Modify();
+                    end;
+
+
+            until TimeEntryLineSorted.Next() = 0;
     end;
 }

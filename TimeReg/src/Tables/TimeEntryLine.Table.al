@@ -25,6 +25,12 @@ table 75001 "BNO Time Entry Line"
         field(5; "To Time"; Time)
         {
             Caption = 'To';
+
+            trigger OnValidate()
+            begin
+                Rec."Registred Time Units" := UpdateTime();
+                CalcTimeRemaning();
+            end;
         }
         field(6; "Registred Time Units"; Decimal)
         {
@@ -42,8 +48,13 @@ table 75001 "BNO Time Entry Line"
         field(9; Activity; Code[20])
         {
             Caption = 'Activity';
-            TableRelation = "BNO Activity"."No.";
+            TableRelation = "BNO Activity"."No." where("User Name" = FIELD(User));
             ValidateTableRelation = false;
+
+            trigger OnValidate()
+            begin
+                CalcTimeRemaning();
+            end;
         }
         field(10; Paused; Boolean)
         {
@@ -55,6 +66,18 @@ table 75001 "BNO Time Entry Line"
                     Rec.Description := 'Pause';
             end;
         }
+        field(11; "Remaining Time"; Duration)
+        {
+            Caption = 'Remaining Time';
+            FieldClass = FlowField;
+            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User Name" = field(User), "No." = field(Activity)));
+        }
+        field(12; "Remaining Time Units"; Decimal)
+        {
+            Caption = 'Remaining Time';
+            FieldClass = FlowField;
+            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
+        }
 
     }
     keys
@@ -64,17 +87,6 @@ table 75001 "BNO Time Entry Line"
             Clustered = true;
         }
     }
-
-    trigger OnInsert()
-    begin
-        Rec."Registred Time Units" := UpdateTime();
-    end;
-
-    trigger OnModify()
-    begin
-        Rec."Registred Time Units" := UpdateTime();
-    end;
-
     procedure UpdateTime() Hours: Decimal
     begin
         Hours := (Rec."To Time" - Rec."From Time") / 6000000 * (100 / 60);
@@ -88,12 +100,43 @@ table 75001 "BNO Time Entry Line"
     begin
         Rec.Init();
         Rec.Date := Today();
-        Rec."To Time" := Time();
+        Rec.Activity := ActivityCode;
         Rec.User := Format(UserId());
         Rec."From Time" := TimeRegUtillities.GetLastTime();
+        Rec.Validate("To Time", Time());
         Rec.Description := Ldescription;
         Rec.Validate(Paused, LPause);
-        Rec.Activity := ActivityCode;
         Rec.Insert(true);
+    end;
+
+    local procedure CalcTimeRemaning()
+    var
+        PActivity: Record "BNO Activity";
+    // TimeRegSetup: Record "BNO TimeReg Setup";
+    // PTimeEntryLine: Record "BNO Time Entry Line";
+    // PTime: Duration;
+    // PTimeUnits: Decimal;
+    begin
+        if Rec.Activity <> '' then begin
+            PActivity.Get(Rec.User, Rec.Activity);
+            if PActivity."Calculate Consumption" then begin
+                // TimeRegSetup.Get();
+                // PActivity.CalcFields("Time Consumption", "Time Units Consumption");
+                // case TimeRegSetup."Unit of Measure" of
+                //     TimeRegSetup."Unit of Measure"::Hours:
+                //         Rec."Remaining Time" := PActivity."Allowed Time Consumption" - PActivity."Time Consumption";
+                //     TimeRegSetup."Unit of Measure"::Units:
+                //         begin
+                //             Rec."Remaining Time Units" := PActivity."Allowed Time Units Consumption" - PActivity."Time Units Consumption";
+                //             PTimeEntryLine.SetRange(User, Rec.User);
+                //             PTimeEntryLine.SetRange(Activity, Rec.Activity);
+                //             PTimeEntryLine.CalcSums("Registred Time Units");
+                //             Rec."Remaining Time Units" -= PTimeEntryLine."Registred Time Units";
+                //             Rec."Remaining Time Units" -= Rec."Registred Time Units";
+                //         end;
+                // end;
+                PActivity.CalcRemainingTime(PActivity, Rec."Registred Time Units", Rec."Registred Time");
+            end;
+        end;
     end;
 }

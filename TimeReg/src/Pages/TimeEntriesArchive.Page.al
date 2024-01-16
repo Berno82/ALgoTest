@@ -59,7 +59,7 @@ page 75005 "BNO Time Entries Archive"
                 Caption = 'Sorted Lines';
                 SubPageLink = Date = field(Date),
                             User = field(User);
-                Visible = not VisibleSum and Rec.Sorted;
+                Visible = not VisibleSum;
             }
         }
     }

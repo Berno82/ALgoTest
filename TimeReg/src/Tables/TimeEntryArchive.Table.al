@@ -1,6 +1,6 @@
 table 75003 "BNO Time Entry Archive"
 {
-    Caption = 'Time Entry';
+    Caption = 'Time Entry Archive';
     DataClassification = CustomerContent;
 
     fields

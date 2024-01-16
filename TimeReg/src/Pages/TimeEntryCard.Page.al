@@ -6,7 +6,7 @@ page 75001 "BNO Time Entry Card"
     PageType = Card;
     RefreshOnActivate = true;
     SourceTable = "BNO Time Entry";
-    UsageCategory = Administration;
+    UsageCategory = Tasks;
 
     layout
     {
@@ -209,7 +209,7 @@ page 75001 "BNO Time Entry Card"
 
     trigger OnOpenPage()
     begin
-        InitRecord();
+        // InitRecord();
         if not TimeEntry.Get(UserId(), Today()) then
             SetTimeEntry();
         Rec.FilterGroup(2);
@@ -232,19 +232,19 @@ page 75001 "BNO Time Entry Card"
         TimeRegSetup.Modify();
     end;
 
-    local procedure InitRecord()
-    begin
-        if not TimeRegSetup.Get(UserId()) then begin
-            TimeRegSetup.Init();
-            TimeRegSetup.User := Format(UserId());
-            TimeRegSetup."Last Time" := Time();
-            TimeRegSetup.Insert();
-        end;
-        if TimeRegSetup."Last Time" > Time() then begin
-            TimeRegSetup."Last Time" := Time();
-            TimeRegSetup.Modify();
-        end;
-    end;
+    // local procedure InitRecord()
+    // begin
+    //     if not TimeRegSetup.Get(UserId()) then begin
+    //         TimeRegSetup.Init();
+    //         TimeRegSetup.User := Format(UserId());
+    //         TimeRegSetup."Last Time" := Time();
+    //         TimeRegSetup.Insert();
+    //     end;
+    //     if TimeRegSetup."Last Time" > Time() then begin
+    //         TimeRegSetup."Last Time" := Time();
+    //         TimeRegSetup.Modify();
+    //     end;
+    // end;
 
     local procedure EnterTimeEntryLine()
     var

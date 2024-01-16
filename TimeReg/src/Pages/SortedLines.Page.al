@@ -41,6 +41,20 @@ page 75008 "BNO Sorted Lines"
                     Visible = Units;
                     ToolTip = 'Specifies the value of the Registred Time Units field.';
                 }
+                field("Remaining Time"; Rec."Remaining Time")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Time Remaining';
+                    ToolTip = 'Specifies the value of the Time Consumed field.';
+                    Visible = not Units;
+                }
+                field("Remaining Time Units"; Rec."Remaining Time Units")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Time Remaining';
+                    ToolTip = 'Specifies the value of the Time Units Consumed field.';
+                    Visible = Units;
+                }
             }
         }
     }
@@ -62,6 +76,5 @@ page 75008 "BNO Sorted Lines"
             StyleVar := 'Unfavorable'
         else
             StyleVar := 'None';
-
     end;
 }

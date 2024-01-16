@@ -41,12 +41,25 @@ table 75004 "BNO Time Entry Line Archive"
         field(9; Activity; Code[20])
         {
             Caption = 'Activity';
+            TableRelation = "BNO Activity"."No." where("User Name" = FIELD(User));
+            ValidateTableRelation = false;
         }
         field(10; Paused; Boolean)
         {
             Caption = 'Paused';
         }
-
+        field(11; "Remaining Time"; Duration)
+        {
+            Caption = 'Remaining Time';
+            FieldClass = FlowField;
+            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User Name" = field(User), "No." = field(Activity)));
+        }
+        field(12; "Remaining Time Units"; Decimal)
+        {
+            Caption = 'Remaining Time';
+            FieldClass = FlowField;
+            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
+        }
     }
     keys
     {
@@ -87,12 +100,13 @@ table 75004 "BNO Time Entry Line Archive"
         TimeEntryArchive: Record "BNO Time Entry Archive";
         TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
     begin
-        TimeEntryArchive.Get(Rec.User, Rec.Date);
-        TimeEntryArchive.Sorted := false;
-        TimeEntryArchive.Modify();
+        if TimeEntryArchive.Get(Rec.User, Rec.Date) then begin
+            TimeEntryArchive.Sorted := false;
+            TimeEntryArchive.Modify();
 
-        TimeEntryLineSorted.SetRange(User, Rec.User);
-        TimeEntryLineSorted.SetRange(Date, Rec.Date);
-        TimeEntryLineSorted.DeleteAll();
+            TimeEntryLineSorted.SetRange(User, Rec.User);
+            TimeEntryLineSorted.SetRange(Date, Rec.Date);
+            TimeEntryLineSorted.DeleteAll();
+        end;
     end;
 }
