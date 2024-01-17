@@ -1,6 +1,6 @@
-table 75004 "BNO Time Entry Line Archive"
+table 75006 "BNO Time Entry Line Sorted"
 {
-    Caption = 'Time Entry Line Archive';
+    Caption = 'Time Entry Line Sorted';
     DataClassification = CustomerContent;
 
     fields
@@ -8,10 +8,12 @@ table 75004 "BNO Time Entry Line Archive"
         field(1; User; Text[100])
         {
             Caption = 'User';
+
         }
         field(2; "Date"; Date)
         {
             Caption = 'Date';
+
         }
         field(3; "Entry No."; Integer)
         {
@@ -42,7 +44,6 @@ table 75004 "BNO Time Entry Line Archive"
         {
             Caption = 'Activity';
             TableRelation = "BNO Activity"."No." where("User Name" = FIELD(User));
-            ValidateTableRelation = false;
         }
         field(10; Paused; Boolean)
         {
@@ -75,38 +76,34 @@ table 75004 "BNO Time Entry Line Archive"
     }
 
     trigger OnInsert()
-    begin
-        Rec."Registred Time Units" := UpdateTime();
-        CleanUpSorted();
-
-    end;
-
-    trigger OnModify()
-    begin
-        Rec."Registred Time Units" := UpdateTime();
-        CleanUpSorted();
-
-    end;
-
-    procedure UpdateTime() Hours: Decimal
-    begin
-        Hours := (Rec."To Time" - Rec."From Time") / 6000000 * (100 / 60);
-
-        Rec."Registred Time" := Rec."To Time" - Rec."From Time";
-    end;
-
-    local procedure CleanUpSorted()
     var
         TimeEntryArchive: Record "BNO Time Entry Archive";
-        TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
     begin
-        if TimeEntryArchive.Get(Rec.User, Rec.Date) then begin
-            TimeEntryArchive.Sorted := false;
-            TimeEntryArchive.Modify();
+        TimeEntryArchive.Get(Rec.User, Rec.Date);
+        TimeEntryArchive.Sorted := true;
+        TimeEntryArchive.Modify();
 
-            TimeEntryLineSorted.SetRange(User, Rec.User);
-            TimeEntryLineSorted.SetRange(Date, Rec.Date);
-            TimeEntryLineSorted.DeleteAll();
-        end;
+        // CalcTimeRemaning();
     end;
+
+    // local procedure CalcTimeRemaning()
+    // var
+    //     PActivity: Record "BNO Activity";
+    // // TimeRegSetup: Record "BNO TimeReg Setup";
+    // begin
+    //     if Rec.Activity <> '' then begin
+    //         PActivity.Get(Rec.User, Rec.Activity);
+    //         if PActivity."Calculate Consumption" then begin
+    //             // TimeRegSetup.Get();
+    //             // PActivity.CalcFields("Time Consumption", "Time Units Consumption");
+    //             // case TimeRegSetup."Unit of Measure" of
+    //             //     TimeRegSetup."Unit of Measure"::Hours:
+    //             //         Rec."remaining Time" := PActivity."Allowed Time Consumption" - PActivity."Time Consumption";
+    //             //     TimeRegSetup."Unit of Measure"::Units:
+    //             //         Rec."remaining Time" := PActivity."Allowed Time Units Consumption" - PActivity."Time Units Consumption";
+    //             // end;
+    //             PActivity.CalcRemainingTime(PActivity);
+    //         end;
+    //     end;
+    // end;
 }

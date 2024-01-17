@@ -1,8 +1,8 @@
-page 75002 "BNO Time Entry Lines"
+page 75006 "BNO Time Entry Archive Lines"
 {
-    Caption = 'Time Entry Lines';
+    Caption = 'Time Entry Archive Lines';
     PageType = ListPart;
-    SourceTable = "BNO Time Entry Line";
+    SourceTable = "BNO Time Entry Line Archive";
 
     layout
     {
@@ -35,36 +35,46 @@ page 75002 "BNO Time Entry Lines"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Activity field.';
                 }
-                field("Remaining Time"; Rec."Remaining Time")
+                field("Registred Time Units"; Rec."Registred Time Units")
                 {
                     ApplicationArea = All;
-                    Editable = false;
-                    StyleExpr = StyleVar;
-                    ToolTip = 'Specifies the value of the Remaining Time field.';
+                    Visible = Units;
+                    ToolTip = 'Specifies the value of the Registred Time Units field.';
+                }
+                field("Registred Time"; Rec."Registred Time")
+                {
+                    ApplicationArea = All;
                     Visible = not Units;
+                    ToolTip = 'Specifies the value of the Registred Time field.';
                 }
                 field("Remaining Time Units"; Rec."Remaining Time Units")
                 {
                     ApplicationArea = All;
-                    Editable = false;
+                    Visible = Units;
                     StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Remaining Time Units field.';
-                    Visible = Units;
+                }
+                field("Remaining Time"; Rec."Remaining Time")
+                {
+                    ApplicationArea = All;
+                    Visible = not Units;
+                    StyleExpr = StyleVar;
+                    ToolTip = 'Specifies the value of the Remaining Time field.';
                 }
             }
         }
     }
+
     var
+        TimeRegSetup: Record "BNO TimeReg Setup";
         Units: Boolean;
         StyleVar: Text;
 
-    trigger OnOpenPage();
-    var
-        TimeRegSetup: Record "BNO TimeReg Setup";
+    trigger OnOpenPage()
     begin
-        TimeRegSetup.Get();
-        if TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units then
-            Units := true;
+        TimeRegSetup.Get(UserID);
+        Units := TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units;
+
     end;
 
     trigger OnAfterGetRecord()

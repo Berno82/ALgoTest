@@ -18,6 +18,14 @@ page 75003 "BNO TimeReg Setup"
                 {
                     ToolTip = 'Specifies the value of the Interval Minutes field.';
                 }
+                field("Unit of Measure"; Rec."Unit of Measure")
+                {
+                    ToolTip = 'Specifies the value of the Unit of Measure field.';
+                }
+                field("Cosumption Warning %"; Rec."Cosumption Warning %")
+                {
+                    ToolTip = 'Specifies the value of the Cosumption Warning % field.';
+                }
             }
         }
     }
@@ -34,4 +42,13 @@ page 75003 "BNO TimeReg Setup"
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        if not Rec.Get(UserId()) then begin
+            Rec.Init();
+            Rec.Insert();
+        end;
+
+    end;
 }

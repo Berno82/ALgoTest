@@ -7,19 +7,19 @@ table 75002 "BNO TimeReg Setup"
     {
         field(1; User; Text[1024])
         {
-            Caption = 'No.';
+            Caption = 'No.', Locked = true;
         }
         field(2; "Last Time"; Time)
         {
-            Caption = 'Last Time';
+            Caption = 'Last Time', Locked = true;
         }
         field(3; Pause; Boolean)
         {
-            Caption = 'Pause';
+            Caption = 'Pause', Locked = true;
         }
         field(4; Interval; Integer)
         {
-            Caption = 'Interval Minutes';
+            Caption = 'Interval (Minutes)';
             trigger OnValidate()
             begin
                 Rec."Wait Time" := Rec.Interval * 1000 * 60;
@@ -27,7 +27,16 @@ table 75002 "BNO TimeReg Setup"
         }
         field(5; "Wait Time"; Duration)
         {
-            Caption = 'Wait Time';
+            Caption = 'Wait Time', Locked = true;
+        }
+        field(6; "Unit of Measure"; Option)
+        {
+            Caption = 'Unit of Measure';
+            OptionMembers = "Units","Hours";
+        }
+        field(7; "Cosumption Warning %"; Integer)
+        {
+            Caption = 'Cosumption Warning %';
         }
     }
     keys

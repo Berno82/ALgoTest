@@ -26,11 +26,8 @@ page 75000 "BNO Time Sheet"
                     ToolTip = 'Specifies the value of the Activity field.';
 
                     trigger OnValidate()
-                    var
-                        Activity: Record "BNO Activity";
                     begin
-                        if Activity.Get(Rec.Activity) then
-                            ActivityTxt := Activity.Description;
+                        SetActivityText();
                     end;
                 }
                 field(ActivityDescription; ActivityTxt)
@@ -53,22 +50,29 @@ page 75000 "BNO Time Sheet"
                 Image = Action;
                 ShortcutKey = 'Ctrl+Enter';
                 ToolTip = 'Executes the Create Time Entry action.';
-                // Visible = false;
+
+                trigger OnAction()
+                begin
+                    CreateTimeEntry(false, Rec.Description, Rec.Activity);
+                end;
+            }
+            action(Pause)
+            {
+                Caption = 'Pause';
+                Image = Pause;
+                ToolTip = 'Pause Time registration';
 
                 trigger OnAction()
                 var
                     TimeEntryLine: Record "BNO Time Entry Line";
-                    TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
                 begin
-                    TimeEntryLine.Init();
-                    TimeEntryLine.Date := Today();
-                    TimeEntryLine."To Time" := Time();
-                    TimeEntryLine.User := Format(UserId());
-                    TimeEntryLine."From Time" := TimeRegUtillities.GetLastTime(UserId());
-                    TimeEntryLine.Description := Rec.Description;
-                    TimeEntryLine.Activity := Rec.Activity;
-                    TimeEntryLine.Insert(true);
+                    TimeEntryLine.SetRange(User, Rec.User);
+                    TimeEntryLine.SetRange(Date, Today());
+                    if TimeEntryLine.FindLast() then
+                        TimeRegUtillities.SetLastTime(TimeEntryLine."To Time", true);
 
+                    CanClose := true;
+                    CurrPage.Close();
                 end;
             }
 
@@ -76,24 +80,59 @@ page 75000 "BNO Time Sheet"
         area(Promoted)
         {
             actionref("TimeCreateRef"; "Create Time Entry") { }
+            actionref("Pause Ref"; Pause) { }
         }
     }
     var
-
+        TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
         ActivityTxt: Text[2048];
+        CanClose: Boolean;
 
-    trigger OnOpenPage()
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    var
+        CloseErr: Label 'Can only be closed by using actions';
+
+    begin
+        if CanClose then
+            exit(true);
+        Message(CloseErr);
+        exit(false);
+    end;
+
+    procedure SetRecord(var TempTimeEntryLine: Record "BNO Time Entry Line" temporary)
+    begin
+        Rec := TempTimeEntryLine;
+        Rec.Insert();
+        SetActivityText();
+    end;
+
+    local procedure CreateTimeEntry(LPause: Boolean; Ldescription: Text[1024]; ActivityCode: Code[20])
+    var
+        TimeEntryLine: Record "BNO Time Entry Line";
+
+    begin
+        TimeEntryLine.InsertTimeEntry(LPause, Ldescription, ActivityCode);
+
+        if LPause then
+            PauseTime(TimeEntryLine."To Time");
+        CanClose := true;
+        CurrPage.Close();
+    end;
+
+    local procedure PauseTime(ToTime: Time)
     var
         TimeRegSetup: Record "BNO TimeReg Setup";
     begin
         TimeRegSetup.Get(UserId());
         if TimeRegSetup.Pause then
-            TimeRegSetup."Last Time" := Time();
+            TimeRegUtillities.SetLastTime(ToTime, false);
     end;
 
-    procedure SetRecords(var TempTimeEntryLine: Record "BNO Time Entry Line" temporary)
+    local procedure SetActivityText()
+    var
+        ActivityRecord: Record "BNO Activity";
     begin
-        Rec := TempTimeEntryLine;
-        Rec.Insert();
+        if ActivityRecord.Get(Rec.User, Rec.Activity) then
+            ActivityTxt := ActivityRecord.Description;
     end;
 }

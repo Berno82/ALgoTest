@@ -3,14 +3,17 @@
 		{
 			"path": ".AL-Go"
 		},
-		{
+		{	
+			"name": "Time Reg App",
 			"path": "TimeReg"
 		},
-		{
+		{	
+			"name": "Time Reg Test App",
 			"path": "TimeReg.Test"
 		},
 		{
-			"path": .alpackages
+			"name:": "AL packages",
+			"path": ".alpackages"
 		}
 	],
 	"settings": {
