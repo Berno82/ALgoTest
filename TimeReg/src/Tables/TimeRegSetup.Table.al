@@ -34,6 +34,10 @@ table 75002 "BNO TimeReg Setup"
             Caption = 'Unit of Measure';
             OptionMembers = "Units","Hours";
         }
+        field(7; "Cosumption Warning %"; Integer)
+        {
+            Caption = 'Cosumption Warning %';
+        }
     }
     keys
     {

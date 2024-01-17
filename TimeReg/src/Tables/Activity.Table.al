@@ -21,7 +21,7 @@ table 75005 "BNO Activity"
         {
             Caption = 'Calculate Consumption';
         }
-        field(5; "Allowed Time Consumption"; Decimal)
+        field(5; "Allowed Time Consumption"; Duration)
         {
             Caption = 'Allowed Time Consumption';
 
@@ -31,7 +31,7 @@ table 75005 "BNO Activity"
                     "Calculate Consumption" := true;
             end;
         }
-        field(6; "Allowed Time Units Consumption"; Decimal)
+        field(6; "Allowed Time Units Consumption"; Integer)
         {
             Caption = 'Allowed Time Consumption';
             trigger OnValidate()
@@ -44,6 +44,7 @@ table 75005 "BNO Activity"
         field(7; "Time Units Consumption"; Decimal)
         {
             Caption = 'Time Consumption';
+            DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
             CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Activity = field("No."), User = field("User Name")));
             Editable = false;
@@ -58,6 +59,7 @@ table 75005 "BNO Activity"
         field(9; "Remaining Time Units"; Decimal)
         {
             Caption = 'Remining Time';
+            DecimalPlaces = 2 : 2;
             Editable = false;
         }
         field(10; "Remaining Time"; Duration)
@@ -96,5 +98,29 @@ table 75005 "BNO Activity"
         Activity."Remaining Time Units" := Activity."Allowed Time Units Consumption" - TimeEntryLineArchive."Registred Time Units" - TimeEntryLine."Registred Time Units" - CurrTimeUnits;
         Activity."Remaining Time" := Activity."Allowed Time Consumption" - TimeEntryLine."Registred Time" - TimeEntryLineArchive."Registred Time" - CurrTime;
         Activity.Modify();
+    end;
+
+    procedure SetStyleVar(var PstyleVar: Text)
+    var
+        TimeRegSetup: Record "BNO TimeReg Setup";
+        Low: Boolean;
+    begin
+        case TimeRegSetup."Unit of Measure" of
+            TimeRegSetup."Unit of Measure"::Units:
+                begin
+                    Rec.CalcFields("Time Units Consumption");
+                    if (Rec."Time Units Consumption" / Rec."Allowed Time Units Consumption" * 100) < TimeRegSetup."Cosumption Warning %" then
+                        Low := true
+                    else
+                        if Rec."Time Consumption" < Rec."Allowed Time Consumption" then
+                            Low := true
+                end;
+        end;
+
+        if Low then
+            PStyleVar := 'Unfavorable'
+        else
+            PStyleVar := 'None';
+
     end;
 }

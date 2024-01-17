@@ -35,6 +35,7 @@ table 75001 "BNO Time Entry Line"
         field(6; "Registred Time Units"; Decimal)
         {
             Caption = 'Registred Time';
+            DecimalPlaces = 2 : 2;
         }
         field(7; "Registred Time"; Duration)
         {
@@ -75,6 +76,7 @@ table 75001 "BNO Time Entry Line"
         field(12; "Remaining Time Units"; Decimal)
         {
             Caption = 'Remaining Time';
+            DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
             CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
         }
@@ -119,24 +121,8 @@ table 75001 "BNO Time Entry Line"
     begin
         if Rec.Activity <> '' then begin
             PActivity.Get(Rec.User, Rec.Activity);
-            if PActivity."Calculate Consumption" then begin
-                // TimeRegSetup.Get();
-                // PActivity.CalcFields("Time Consumption", "Time Units Consumption");
-                // case TimeRegSetup."Unit of Measure" of
-                //     TimeRegSetup."Unit of Measure"::Hours:
-                //         Rec."Remaining Time" := PActivity."Allowed Time Consumption" - PActivity."Time Consumption";
-                //     TimeRegSetup."Unit of Measure"::Units:
-                //         begin
-                //             Rec."Remaining Time Units" := PActivity."Allowed Time Units Consumption" - PActivity."Time Units Consumption";
-                //             PTimeEntryLine.SetRange(User, Rec.User);
-                //             PTimeEntryLine.SetRange(Activity, Rec.Activity);
-                //             PTimeEntryLine.CalcSums("Registred Time Units");
-                //             Rec."Remaining Time Units" -= PTimeEntryLine."Registred Time Units";
-                //             Rec."Remaining Time Units" -= Rec."Registred Time Units";
-                //         end;
-                // end;
+            if PActivity."Calculate Consumption" then
                 PActivity.CalcRemainingTime(PActivity, Rec."Registred Time Units", Rec."Registred Time");
-            end;
         end;
     end;
 }

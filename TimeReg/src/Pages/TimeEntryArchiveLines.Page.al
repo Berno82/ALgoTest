@@ -47,6 +47,20 @@ page 75006 "BNO Time Entry Archive Lines"
                     Visible = not Units;
                     ToolTip = 'Specifies the value of the Registred Time field.';
                 }
+                field("Remaining Time Units"; Rec."Remaining Time Units")
+                {
+                    ApplicationArea = All;
+                    Visible = Units;
+                    StyleExpr = StyleVar;
+                    ToolTip = 'Specifies the value of the Remaining Time Units field.';
+                }
+                field("Remaining Time"; Rec."Remaining Time")
+                {
+                    ApplicationArea = All;
+                    Visible = not Units;
+                    StyleExpr = StyleVar;
+                    ToolTip = 'Specifies the value of the Remaining Time field.';
+                }
             }
         }
     }
@@ -54,11 +68,20 @@ page 75006 "BNO Time Entry Archive Lines"
     var
         TimeRegSetup: Record "BNO TimeReg Setup";
         Units: Boolean;
+        StyleVar: Text;
 
     trigger OnOpenPage()
     begin
         TimeRegSetup.Get(UserID);
         Units := TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units;
 
+    end;
+
+    trigger OnAfterGetRecord()
+    var
+        PActivity: Record "BNO Activity";
+    begin
+        PActivity.Get(Rec.User, Rec.Activity);
+        PActivity.SetStyleVar(StyleVar);
     end;
 }

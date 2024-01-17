@@ -30,14 +30,16 @@ page 75008 "BNO Sorted Lines"
                 field("Registred Time"; Rec."Registred Time")
                 {
                     ApplicationArea = All;
-                    StyleExpr = StyleVar;
+                    Style = Ambiguous;
+                    StyleExpr = ApplyStyle;
                     Visible = not Units;
                     ToolTip = 'Specifies the value of the Registred Time field.';
                 }
                 field("Registred Time Units"; Rec."Registred Time Units")
                 {
                     ApplicationArea = All;
-                    StyleExpr = StyleVar;
+                    Style = Ambiguous;
+                    StyleExpr = ApplyStyle;
                     Visible = Units;
                     ToolTip = 'Specifies the value of the Registred Time Units field.';
                 }
@@ -61,8 +63,9 @@ page 75008 "BNO Sorted Lines"
 
     var
         TimeRegSetup: Record "BNO TimeReg Setup";
-        StyleVar: Text[50];
+        StyleVar: Text;
         Units: Boolean;
+        ApplyStyle: Boolean;
 
     trigger OnOpenPage();
     begin
@@ -71,10 +74,12 @@ page 75008 "BNO Sorted Lines"
     end;
 
     trigger OnAfterGetRecord()
+    var
+        PActivity: Record "BNO Activity";
     begin
         if Rec."Registred Time Units" < 0.5 then
-            StyleVar := 'Unfavorable'
-        else
-            StyleVar := 'None';
+            ApplyStyle := true;
+        PActivity.Get(Rec.User, Rec.Activity);
+        PActivity.SetStyleVar(StyleVar);
     end;
 }

@@ -22,6 +22,10 @@ page 75003 "BNO TimeReg Setup"
                 {
                     ToolTip = 'Specifies the value of the Unit of Measure field.';
                 }
+                field("Cosumption Warning %"; Rec."Cosumption Warning %")
+                {
+                    ToolTip = 'Specifies the value of the Cosumption Warning % field.';
+                }
             }
         }
     }

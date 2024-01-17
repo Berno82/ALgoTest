@@ -32,7 +32,7 @@ page 75004 "BNO Activities"
                 }
                 field("Time Consumption"; Rec."Time Consumption")
                 {
-                    StyleExpr = StyleVar;
+
                     ToolTip = 'Specifies the value of the Time Consumption field.';
                     Visible = not Units;
                 }
@@ -43,11 +43,13 @@ page 75004 "BNO Activities"
                 }
                 field("Remaining Time"; Rec."Remaining Time")
                 {
+                    StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Remaining Time field.';
                     Visible = not Units;
                 }
                 field("Remaining Time Units"; Rec."Remaining Time Units")
                 {
+                    StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Remaining Time Units field.';
                     Visible = Units;
                 }
@@ -62,7 +64,7 @@ page 75004 "BNO Activities"
             action("Update Remaining Time")
             {
                 Caption = 'Update Remaining Time';
-
+                ToolTip = 'Executes the Update Remaining Time action.';
                 trigger OnAction()
                 var
                     Activity: Record "BNO Activity";
@@ -85,7 +87,7 @@ page 75004 "BNO Activities"
     var
         TimeRegSetup: Record "BNO TimeReg Setup";
         Units: Boolean;
-        stylevar: Text[250];
+        StyleVar: Text;
 
     trigger OnOpenPage();
     begin
@@ -97,22 +99,9 @@ page 75004 "BNO Activities"
     end;
 
     trigger OnAfterGetRecord()
-    var
-        Low: Boolean;
     begin
-        case TimeRegSetup."Unit of Measure" of
-            TimeRegSetup."Unit of Measure"::Units:
-                if (Rec."Time Units Consumption" - Rec."Allowed Time Units Consumption" * 100) < 20 then
-                    Low := true
-                else
-                    if Rec."Time Consumption" < Rec."Allowed Time Consumption" then
-                        Low := true
-        end;
-
-        if Low then
-            StyleVar := 'Unfavorable'
-        else
-            StyleVar := 'None';
-
+        Rec.SetStyleVar(StyleVar);
     end;
+
+
 }

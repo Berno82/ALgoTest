@@ -39,6 +39,7 @@ page 75002 "BNO Time Entry Lines"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Remaining Time field.';
                     Visible = not Units;
                 }
@@ -46,6 +47,7 @@ page 75002 "BNO Time Entry Lines"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Remaining Time Units field.';
                     Visible = Units;
                 }
@@ -54,6 +56,7 @@ page 75002 "BNO Time Entry Lines"
     }
     var
         Units: Boolean;
+        StyleVar: Text;
 
     trigger OnOpenPage();
     var
@@ -62,5 +65,13 @@ page 75002 "BNO Time Entry Lines"
         TimeRegSetup.Get();
         if TimeRegSetup."Unit of Measure" = TimeRegSetup."Unit of Measure"::Units then
             Units := true;
+    end;
+
+    trigger OnAfterGetRecord()
+    var
+        PActivity: Record "BNO Activity";
+    begin
+        PActivity.Get(Rec.User, Rec.Activity);
+        PActivity.SetStyleVar(StyleVar);
     end;
 }
