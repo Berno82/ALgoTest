@@ -12,5 +12,6 @@ permissionset 75000 "BNO TimeReg"
         tabledata "BNO Time Entry Archive" = RMID,
         tabledata "BNO Time Entry Line Archive" = RMID,
         tabledata "BNO Activity" = RMID,
-        tabledata "BNO Time Entry Line Sorted" = RMID;
+        tabledata "BNO Time Entry Line Sorted" = RMID,
+        tabledata "BNO Open AI Setup" = RMID;
 }

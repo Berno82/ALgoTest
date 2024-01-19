@@ -47,6 +47,7 @@ page 75008 "BNO Sorted Lines"
                 {
                     ApplicationArea = All;
                     Caption = 'Time Remaining';
+                    StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Time Consumed field.';
                     Visible = not Units;
                 }
@@ -54,6 +55,7 @@ page 75008 "BNO Sorted Lines"
                 {
                     ApplicationArea = All;
                     Caption = 'Time Remaining';
+                    StyleExpr = StyleVar;
                     ToolTip = 'Specifies the value of the Time Units Consumed field.';
                     Visible = Units;
                 }

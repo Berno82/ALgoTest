@@ -1,0 +1,1 @@
+{"date": "2024-01-18","fromTime": "08:00:00","toTime": "13:00:00","description": "test time entry line","activity": "A0004448"}

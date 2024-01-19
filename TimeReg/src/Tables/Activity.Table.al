@@ -105,15 +105,17 @@ table 75005 "BNO Activity"
         TimeRegSetup: Record "BNO TimeReg Setup";
         Low: Boolean;
     begin
+        TimeRegSetup.Get("User Name");
         case TimeRegSetup."Unit of Measure" of
             TimeRegSetup."Unit of Measure"::Units:
                 begin
                     Rec.CalcFields("Time Units Consumption");
-                    if (Rec."Time Units Consumption" / Rec."Allowed Time Units Consumption" * 100) < TimeRegSetup."Cosumption Warning %" then
-                        Low := true
-                    else
-                        if Rec."Time Consumption" < Rec."Allowed Time Consumption" then
+                    if (Rec."Time Units Consumption" <> 0) and (Rec."Allowed Time Units Consumption" <> 0) then
+                        if (Rec."Time Units Consumption" / Rec."Allowed Time Units Consumption" * 100) > TimeRegSetup."Cosumption Warning %" then
                             Low := true
+                        else
+                            if Rec."Time Consumption" < Rec."Allowed Time Consumption" then
+                                Low := true
                 end;
         end;
 
