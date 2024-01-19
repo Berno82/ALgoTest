@@ -143,17 +143,6 @@ page 75001 "BNO Time Entry Card"
                     TimeRegUtillities.SumCurrentLines(Rec.User, Rec.Date);
                 end;
             }
-            // action(GenerateCopilot)
-            // {
-            //     Caption = 'Generate Copilot';
-            //     Image = Sparkle;
-            //     ToolTip = 'Executes the Generate Copilot action.';
-
-            //     trigger OnAction()
-            //     begin
-            //         Page.RunModal(Page::"BNO Generate Time Entry Line");
-            //     end;
-            // }
         }
         area(Navigation)
         {
@@ -178,15 +167,9 @@ page 75001 "BNO Time Entry Card"
 
                 trigger OnAction()
                 var
-                    TimeEntryArchive: Record "BNO Time Entry Archive";
-                    TimeEntriesArchive: Page "BNO Time Entries Archive";
+                    TimeEntriesArchive: Page "BNO Time Entries Archive list";
                 begin
-                    TimeEntryArchive.FilterGroup(2);
-                    TimeEntryArchive.SetRange(User, Rec.User);
-                    TimeEntryArchive.FilterGroup(0);
-                    TimeEntryArchive.FindLast();
-                    TimeEntriesArchive.SetRecord(TimeEntryArchive);
-                    TimeEntriesArchive.Run();
+                    TimeEntriesArchive.RunModal();
                 end;
             }
 
@@ -231,20 +214,6 @@ page 75001 "BNO Time Entry Card"
         TimeRegSetup.Pause := false;
         TimeRegSetup.Modify();
     end;
-
-    // local procedure InitRecord()
-    // begin
-    //     if not TimeRegSetup.Get(UserId()) then begin
-    //         TimeRegSetup.Init();
-    //         TimeRegSetup.User := Format(UserId());
-    //         TimeRegSetup."Last Time" := Time();
-    //         TimeRegSetup.Insert();
-    //     end;
-    //     if TimeRegSetup."Last Time" > Time() then begin
-    //         TimeRegSetup."Last Time" := Time();
-    //         TimeRegSetup.Modify();
-    //     end;
-    // end;
 
     local procedure EnterTimeEntryLine()
     var
