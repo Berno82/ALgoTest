@@ -1,9 +1,9 @@
 page 75010 "BNO Time Entries Archive List"
 {
     ApplicationArea = All;
-    Caption = 'BNO Time Entry Archives';
+    Caption = 'Time Entries Archive';
     PageType = List;
-    CardPageId = "BNO Time Entries Archive";
+    CardPageId = "BNO Time Entry Archive";
     SourceTable = "BNO Time Entry Archive";
     UsageCategory = Lists;
 

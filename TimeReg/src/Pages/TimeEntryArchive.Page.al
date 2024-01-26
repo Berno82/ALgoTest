@@ -1,7 +1,7 @@
-page 75005 "BNO Time Entries Archive"
+page 75005 "BNO Time Entry Archive"
 {
     ApplicationArea = All;
-    Caption = 'Time Entries Archive';
+    Caption = 'Time Entry Archive';
     PageType = Card;
     SourceTable = "BNO Time Entry Archive";
 
@@ -97,16 +97,21 @@ page 75005 "BNO Time Entries Archive"
                 Visible = not VisibleSum;
 
                 trigger OnAction()
+                var
+                    TimeEntryLineArchiveSorted: Record "BNO Time Entry Line Sorted";
                 begin
                     VisibleSum := true;
+                    TimeEntryLineArchiveSorted.SetRange("User", Rec.User);
+                    TimeEntryLineArchiveSorted.SetRange("Date", Rec.Date);
+                    TimeEntryLineArchiveSorted.DeleteAll(true);
                 end;
             }
         }
 
         area(Promoted)
         {
-            actionref(Sum_ref;Sum) {}
-            actionref(Lines_ref;Lines) {}
+            actionref(Sum_ref; Sum) { }
+            actionref(Lines_ref; Lines) { }
         }
     }
 

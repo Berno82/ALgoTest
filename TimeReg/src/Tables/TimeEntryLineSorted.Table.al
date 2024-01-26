@@ -76,34 +76,26 @@ table 75006 "BNO Time Entry Line Sorted"
     }
 
     trigger OnInsert()
+    begin
+        SetSorted(true);
+    end;
+
+    trigger OnDelete()
+    var
+        TimeEntryLineSorted: Record "BNO Time Entry Line Sorted";
+    begin
+        TimeEntryLineSorted.SetRange(User, Rec.User);
+        TimeEntryLineSorted.SetRange(Date, Rec.Date);
+        TimeEntryLineSorted.Delete();
+        SetSorted(false);
+    end;
+
+    local procedure SetSorted(Sorted: Boolean)
     var
         TimeEntryArchive: Record "BNO Time Entry Archive";
     begin
         TimeEntryArchive.Get(Rec.User, Rec.Date);
-        TimeEntryArchive.Sorted := true;
+        TimeEntryArchive.Sorted := Sorted;
         TimeEntryArchive.Modify();
-
-        // CalcTimeRemaning();
     end;
-
-    // local procedure CalcTimeRemaning()
-    // var
-    //     PActivity: Record "BNO Activity";
-    // // TimeRegSetup: Record "BNO TimeReg Setup";
-    // begin
-    //     if Rec.Activity <> '' then begin
-    //         PActivity.Get(Rec.User, Rec.Activity);
-    //         if PActivity."Calculate Consumption" then begin
-    //             // TimeRegSetup.Get();
-    //             // PActivity.CalcFields("Time Consumption", "Time Units Consumption");
-    //             // case TimeRegSetup."Unit of Measure" of
-    //             //     TimeRegSetup."Unit of Measure"::Hours:
-    //             //         Rec."remaining Time" := PActivity."Allowed Time Consumption" - PActivity."Time Consumption";
-    //             //     TimeRegSetup."Unit of Measure"::Units:
-    //             //         Rec."remaining Time" := PActivity."Allowed Time Units Consumption" - PActivity."Time Units Consumption";
-    //             // end;
-    //             PActivity.CalcRemainingTime(PActivity);
-    //         end;
-    //     end;
-    // end;
 }

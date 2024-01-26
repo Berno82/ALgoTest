@@ -172,18 +172,6 @@ page 75009 "BNO Open AI Setup Card"
                     IsolatedStorage.Set('SystemMessage3', '');
                 end;
             }
-            action(ClearSystemMessage4)
-            {
-                ApplicationArea = All;
-                Caption = 'Clear System Message 4';
-                Image = Delete;
-                ToolTip = 'Clear the system message 4';
-
-                trigger OnAction()
-                begin
-                    IsolatedStorage.Set('SystemMessage4', '');
-                end;
-            }
         }
 
         area(Promoted)

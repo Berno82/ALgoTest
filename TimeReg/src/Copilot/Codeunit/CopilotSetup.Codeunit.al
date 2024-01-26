@@ -14,7 +14,7 @@ codeunit 75003 "BNO Copilot Setup"
     var
         CopilotCapability: Codeunit "Copilot Capability";
         EnvironmentInformation: Codeunit "Environment Information";
-        LearnMoreUrlTxt: Label 'Test Copilot for TIme registration';
+        LearnMoreUrlTxt: Label 'Test Copilot for TIme registration', Locked = true;
     begin
         if EnvironmentInformation.IsSaaS() then
             if not CopilotCapability.IsCapabilityRegistered(Enum::"Copilot Capability"::"Create Time Entry Line") then

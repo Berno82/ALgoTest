@@ -3,11 +3,167 @@
   <file datatype="xml" source-language="en-US" target-language="da-DK" original="TimeReg.g.xlf">
     <body>
       <group id="body">
+        <trans-unit id="Page 3867180793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BNO Generate Time Entry Line</source>
+          <target>Opret Tidsregistreringslinjer</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 346708723 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time Entry Line is accepted</source>
+          <target>Tidsregistrering Accepteret</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Accepted - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 346708723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Accepted</source>
+          <target>AccepteretAccepteret</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Accepted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 659317815 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Activity to register Time to</source>
+          <target>Aktivitet der skal registeres tid på</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Activity - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 659317815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Activity</source>
+          <target>Aktivitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Activity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 3192175264 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Date that you register Time to</source>
+          <target>Dato der bliver regidstreret tid på</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 3192175264 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Date</source>
+          <target>Dato</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description of the job done</source>
+          <target>Beskrivelse af job udført</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target>Beskrivelse</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 2989856733 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Start Time of the Time Entry Line</source>
+          <target>Starttid for Tidsregistreringslinjen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control FromTime - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 2989856733 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>From Time</source>
+          <target>Fra tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control FromTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 2313942450 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>End Time of the Time Entry Line</source>
+          <target>Sluttid for Tidsregistreringslinjen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control ToTime - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Control 2313942450 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To Time</source>
+          <target>Til tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Control ToTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 745909125 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attach Time Entry line suggestion</source>
+          <target>Vedhæft Tidsregistreringsbeskrivlse via fil</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Attach - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 745909125 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attach</source>
+          <target>Vedhæft fil</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Attach - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 788258546 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discard Time Entry line suggestion</source>
+          <target>Afvis Tidsregistreringslinje forslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Cancel - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 788258546 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discard Suggestion</source>
+          <target>Afvis forslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Cancel - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 2626368477 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generate Time Entry Line Copilot suggestion</source>
+          <target>Generér Tidsregistreringsforslag med Copilot</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Generate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 2626368477 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generate</source>
+          <target>Generér</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Generate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 1010501080 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Save Time Entry line suggestion</source>
+          <target>Gem Tidsregistreringsforslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Ok - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 1010501080 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Save Suggestion</source>
+          <target>Gem forslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Ok - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 2388911040 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Regenerate Time Entry Line Copilot suggestion</source>
+          <target>Regenerér Tidsregistreringsforslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Regenerate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 2388911040 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Regenerate</source>
+          <target>Regenerér</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action Regenerate - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2721718298 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activity</source>
           <target>Aktivitet</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 3865862996 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allowed Time Consumption</source>
+          <target>Tilladt tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Allowed Time Consumption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 4274060599 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allowed Time Consumption</source>
+          <target>Tilladt tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Allowed Time Units Consumption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 2725880451 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Calculate Consumption</source>
+          <target>Beregn forbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Calculate Consumption - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2721718298 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Description</source>
@@ -21,11 +177,53 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 953121387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time </source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Remaining Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 1423007952 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Remaining Time Units - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 1864968524 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time Consumption</source>
+          <target>Tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Time Consumption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2721718298 - Field 3633151919 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time Consumption</source>
+          <target>Tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field Time Units Consumption - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2721718298 - Field 129688762 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>User Name</source>
           <target>Brugernavn</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Activity - Field User Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 567550780 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BNO Open AI Setup</source>
+          <target>Opsætning af Open AI</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Open AI Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 567550780 - Field 3004954119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Code</source>
+          <target>Kode</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Open AI Setup - Field Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 567550780 - Field 3813433171 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>MetaPrompt</source>
+          <target>MetaPrompt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Open AI Setup - Field MetaPrompt - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1433149414 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Time Entry</source>
@@ -58,8 +256,8 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry - Field User - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 487173124 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Time Entry</source>
-          <target>Tidsregistrering</target>
+          <source>Time Entry Archive</source>
+          <target>Tidsregistreringsarkiv</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Archive - Property Caption</note>
         </trans-unit>
@@ -81,6 +279,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Archive - Field Date - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 487173124 - Field 1306049006 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pause</source>
+          <target>Pause</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Archive - Field Pause - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 487173124 - Field 1707813441 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pause Units</source>
+          <target>Pause</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Archive - Field Pause Units - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 487173124 - Field 1433137349 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sorted</source>
           <target>Sorteret</target>
@@ -98,6 +308,12 @@
           <target>Tidsregistreringslinje</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1324122752 - Field 346708723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Accepted</source>
+          <target>Accepteret</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line - Field Accepted - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1324122752 - Field 659317815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activity</source>
@@ -146,6 +362,18 @@
           <target>Registeret Tid</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line - Field Registred Time Units - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1324122752 - Field 953121387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line - Field Remaining Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1324122752 - Field 1423007952 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line - Field Remaining Time Units - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1324122752 - Field 3127472418 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>To</source>
@@ -213,6 +441,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line Archive - Field Registred Time Units - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1044388802 - Field 953121387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line Archive - Field Remaining Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1044388802 - Field 1423007952 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line Archive - Field Remaining Time Units - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1044388802 - Field 3127472418 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>To</source>
           <target>Til</target>
@@ -279,6 +519,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line Sorted - Field Registred Time Units - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3179803865 - Field 953121387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line Sorted - Field Remaining Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3179803865 - Field 1423007952 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Remaining Time</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO Time Entry Line Sorted - Field Remaining Time Units - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3179803865 - Field 3127472418 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>To</source>
           <target>Til</target>
@@ -296,6 +548,12 @@
           <target>Opsætning af TimeReg</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table BNO TimeReg Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 202782843 - Field 3143103576 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cosumption Warning %</source>
+          <target>Forbrugsadvarsel %</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table BNO TimeReg Setup - Field Cosumption Warning % - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 202782843 - Field 2809088769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Interval (Minutes)</source>
@@ -327,6 +585,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4240104788 - Control 3865862996 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Allowed Time Consumption field.</source>
+          <target>Angiver tilladt forbrug af timer for en aktivitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control Allowed Time Consumption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Control 4274060599 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Allowed Time Unit Consumption.</source>
+          <target>Angiver tilladt forbrug for en aktivitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control Allowed Time Units Consumption - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 4240104788 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Description field.</source>
           <target>Angiver værdien af feltet Beskrivelse</target>
@@ -338,6 +608,198 @@
           <target>Angiver værdien af feltet Nr.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Control 953121387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Remaining Time field.</source>
+          <target>Angiver værdien af tilbageværende tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control Remaining Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Control 1423007952 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Remaining Time Units field.</source>
+          <target>Angiver værdien af tilbageværende tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control Remaining Time Units - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Control 1864968524 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Time Consumption field.</source>
+          <target>Angiver hvor meget tidsforbrug, der har været på aktiviten</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control Time Consumption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Control 3633151919 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Time Units Consumption field.</source>
+          <target>Angiver hvor meget tidsforbrug, der har været på aktiviten</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Control Time Units Consumption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Action 2144099084 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Executes the Update Remaining Time action.</source>
+          <target>Udfører funktionen, opdater tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Action Update Remaining Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4240104788 - Action 2144099084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Update Remaining Time</source>
+          <target>Opdater tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Activities - Action Update Remaining Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open AI Setup Card</source>
+          <target>Open AI Opsætning</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target>Generelt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3624782086 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Azure Open AI Api Key to use. This is the key in the Azure Portal.</source>
+          <target>Angiver værdien af API nøglen der benyttes til Open AI</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control AzureOpenAIApiKey - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3624782086 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Azure Open AI Api Key</source>
+          <target>Azure Open AI API nøgle</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control AzureOpenAIApiKey - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3159702659 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the deployment to use. This is the name of the deployment in the Azure Portal.</source>
+          <target>Angiver navnet på den udrulning af Open AI, der bruges</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control Deployment - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3159702659 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deployment</source>
+          <target>Udrulning</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control Deployment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 2695595997 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the endpoint to use. This is the name of the endpoint in the Azure Portal.</source>
+          <target>Angiver namet på det endpoint, der benyttes til at kontakte Open AI</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control Endpoint - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 2695595997 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Endpoint</source>
+          <target>Endpoint</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control Endpoint - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 1444402576 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the maximum number of tokens to generate. Tokens are roughly equal to words. The default value is 64. The maximum value is 5000.</source>
+          <target>Angiver højste antal tokens, der kan bruges til Open AI</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control Maxtokens - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 1444402576 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Max Tokens</source>
+          <target>Højeste antal tokens</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control Maxtokens - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3813433171 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how the Open AI should behave, in generel terms, but a little specification is need to reduce unwanted results.</source>
+          <target>Angiver hvordan det ønskes at Open AI skal opføre sig.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control MetaPrompt - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3813433171 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Meta Prompt</source>
+          <target>MetaPrompt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control MetaPrompt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3317184938 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the system message to show in the system message area.</source>
+          <target>Her kan angives systembeskeder til Open AI</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control SystemMessage - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Control 3317184938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Message</source>
+          <target>Systembesked</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Control SystemMessage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 1592669370 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear the system message 1</source>
+          <target>Blank Systembesked 1</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ClearSystemMessage1 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 1592669370 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear System Message 1</source>
+          <target>Blank Systembesked 1</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ClearSystemMessage1 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 3974546815 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear the system message 2</source>
+          <target>Blank Systembesked 2</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ClearSystemMessage2 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 3974546815 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear System Message 2</source>
+          <target>Blank Systembesked 2</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ClearSystemMessage2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 317276136 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear the system message 3</source>
+          <target>Blank Systembesked 3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ClearSystemMessage3 - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 317276136 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear System Message 3</source>
+          <target>Blank Systembesked 3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ClearSystemMessage3 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 3865570867 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Save the changes to the Open AI Setup</source>
+          <target>Gem ændringer til Open AI Opsætning</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action Save - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 3865570867 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target>Gem</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action Save - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 975699090 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show the system messages</source>
+          <target>Vis systembeskeder</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ShowSystemMessages - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 975699090 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show System Messages</source>
+          <target>Vis systembeskeder</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ShowSystemMessages - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 297627549 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show the Setup values</source>
+          <target>Vis Opsætning</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ShowValues - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2957339464 - Action 297627549 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show Values</source>
+          <target>Vis Værdier</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Open AI Setup Card - Action ShowValues - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1080952255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sorted Time Entry Lines</source>
@@ -375,77 +837,155 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Sorted Lines - Control Registred Time Units - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1080952255 - Control 953121387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Time Consumed field.</source>
+          <target>Angiver tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Sorted Lines - Control Remaining Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1080952255 - Control 953121387 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time Remaining</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Sorted Lines - Control Remaining Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1080952255 - Control 1423007952 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Time Units Consumed field.</source>
+          <target>Angiver tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Sorted Lines - Control Remaining Time Units - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1080952255 - Control 1423007952 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time Remaining</source>
+          <target>Tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Sorted Lines - Control Remaining Time Units - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1352301752 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Time Entries Archive</source>
-          <target>Tidsregistrering Arkiv</target>
+          <target>Tidsregistreringsarkiv liste</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 3977521449 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Archived Lines</source>
-          <target>Arkiverede Linjer</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control Archive Lines - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>General</source>
-          <target>Generelt</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control General - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 719571979 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1352301752 - Control 719571979 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Accumulated Time field.</source>
-          <target>Angiver værdien af feltet Samlet Tid</target>
+          <target>Angiver værdien af feltet Samlet Tidsregistrering.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control Accumulated Time - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Control Accumulated Time - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 407501232 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1352301752 - Control 407501232 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Accumulated Time Units field.</source>
-          <target>Angiver værdien af feltet Samlet Tid.</target>
+          <target>Angiver værdien af feltet Samlet Tidsregistrering.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control Accumulated Time Units - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Control Accumulated Time Units - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 3192175264 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1352301752 - Control 3192175264 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Date field.</source>
           <target>Angiver værdien af feltet Dato.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control Date - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Control Date - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 1814464443 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 1352301752 - Control 1306049006 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Pause field.</source>
+          <target>Angiver værdien af Pause feltet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Control Pause - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1352301752 - Control 1707813441 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Pause Units field.</source>
+          <target>Angiver værdien af Pause feltet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Control Pause Units - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1352301752 - Control 1433137349 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Sorted field.</source>
+          <target>Angiver værdien af feltet Sorteret</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive List - Control Sorted - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Time Entry Archive</source>
+          <target>Tidsregistreringsarkiv</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 3977521449 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Archived Lines</source>
+          <target>Arkiverede Linjer</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Archive Lines - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target>Generelt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 719571979 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Accumulated Time field.</source>
+          <target>Angiver værdien af feltet Samlet Tidsregistrering.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Accumulated Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 407501232 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Accumulated Time Units field.</source>
+          <target>Angiver værdien af feltet Samlet Tidsregistrering.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Accumulated Time Units - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 3192175264 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Date field.</source>
+          <target>Angiver værdien af feltet Dato.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 1306049006 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Pause field.</source>
+          <target>Angiver værdien af Pause feltet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Pause - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 1707813441 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Pause Units field.</source>
+          <target>Angiver værdien af Pause feltet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Pause Units - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 487173124 - Control 1814464443 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the User field.</source>
           <target>Angiver værdien af feltet Bruger.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control User - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control User - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Control 154145218 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 487173124 - Control 154145218 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sorted Lines</source>
           <target>Sorterede Linjer</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Control Sorted Lines - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Control Sorted Lines - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Action 3471137671 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 487173124 - Action 3471137671 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Shows the lines.</source>
           <target>Viser Linjer.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Action Lines - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Action Lines - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Action 3471137671 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 487173124 - Action 3471137671 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Lines</source>
           <target>Linjer</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Action Lines - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Action Lines - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Action 3502818357 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 487173124 - Action 3502818357 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sums up the lines.</source>
           <target>Summerer Linjer</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Action Sum - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Action Sum - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3460948506 - Action 3502818357 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 487173124 - Action 3502818357 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sum</source>
           <target>Sum</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entries Archive - Action Sum - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive - Action Sum - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 964007775 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Time Entry Archive Lines</source>
@@ -488,6 +1028,18 @@
           <target>Angiver værdien af feltet Registeret Tid.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive Lines - Control Registred Time Units - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 964007775 - Control 953121387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Remaining Time field.</source>
+          <target>Angiver tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive Lines - Control Remaining Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 964007775 - Control 1423007952 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Remaining Time Units field.</source>
+          <target>Angiver tilbageværende tid</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Archive Lines - Control Remaining Time Units - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 964007775 - Control 3127472418 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the To field.</source>
@@ -567,6 +1119,18 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action Enter Time Entry Line - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3096840770 - Action 753862275 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Executes the Generate Copilot action.</source>
+          <target>Kører Copilot for generéring af Tidsregistreringslinjer</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action GenerateCopilot - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3096840770 - Action 753862275 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generate Copilot</source>
+          <target>Generér Tidsregistreringsforslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action GenerateCopilot - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3096840770 - Action 1306049006 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Pause Time registration</source>
           <target>Pause Tidsregistrering</target>
@@ -579,29 +1143,29 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action Pause - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3096840770 - Action 530928583 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3096840770 - Action 3149441045 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Executes the Start Time action.</source>
           <target>Kører Start Tidsregistrering</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StartTime - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StartTime Action - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3096840770 - Action 530928583 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3096840770 - Action 3149441045 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Start Time</source>
           <target>Start Tidsregistrering</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StartTime - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StartTime Action - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3096840770 - Action 1569048679 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3096840770 - Action 1906604981 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Executes the Stop Time action.</source>
           <target>Kører Stop Tidsregistrering</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StopTime - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StopTime Action - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3096840770 - Action 1569048679 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3096840770 - Action 1906604981 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Stop Time</source>
           <target>Stop Tidsregistrering</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StopTime - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Card - Action StopTime Action - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3096840770 - Action 3502818357 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Executes the Sum action.</source>
@@ -656,6 +1220,18 @@
           <target>Angiver værdien af feltet Fra.</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Lines - Control From Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 122489153 - Control 953121387 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Remaining Time field.</source>
+          <target>Angiver tilbageværende tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Lines - Control Remaining Time - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 122489153 - Control 1423007952 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Remaining Time Units field.</source>
+          <target>Angiver tilbageværende Tidsregistrering</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Time Entry Lines - Control Remaining Time Units - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 122489153 - Control 3127472418 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the To field.</source>
@@ -741,6 +1317,12 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO TimeReg Setup - Control General - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 202782843 - Control 3143103576 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Cosumption Warning % field.</source>
+          <target>Angiver hvornår der skal advares om tidsforbrug</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO TimeReg Setup - Control Cosumption Warning % - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 202782843 - Control 2809088769 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Interval Minutes field.</source>
           <target>Angiver Interval i Minutter</target>
@@ -765,11 +1347,29 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page BNO TimeReg Setup - Action Activities - Property Caption</note>
         </trans-unit>
+        <trans-unit id="EnumExtension 993201395 - EnumValue 3597111653 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Enum 3058546390">
+          <source>Create Time Entry Line</source>
+          <target>Opret Tidsregistreringslinje</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">EnumExtension BNO Copilot Capability - EnumValue Create Time Entry Line - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 1917457810 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>TimeReg</source>
           <target>TimeReg</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PermissionSet BNO TimeReg - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 1295369732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discard Suggestion</source>
+          <target>Afvis forslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action SystemActions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3867180793 - Action 1295369732 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discard Time Entry line suggestion</source>
+          <target>Afvis Tidsregistreringsforslag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page BNO Generate Time Entry Line - Action SystemActions - Property ToolTip</note>
         </trans-unit>
       </group>
     </body>

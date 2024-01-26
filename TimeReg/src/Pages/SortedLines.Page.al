@@ -81,7 +81,7 @@ page 75008 "BNO Sorted Lines"
     begin
         if Rec."Registred Time Units" < 0.5 then
             ApplyStyle := true;
-        PActivity.Get(Rec.User, Rec.Activity);
-        PActivity.SetStyleVar(StyleVar);
+        if PActivity.Get(Rec.User, Rec.Activity) then
+            PActivity.SetStyleVar(StyleVar);
     end;
 }

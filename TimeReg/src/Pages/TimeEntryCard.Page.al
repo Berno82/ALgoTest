@@ -197,6 +197,7 @@ page 75001 "BNO Time Entry Card"
             actionref(Sum_Ref; Sum) { }
             actionref(EnterTimeEntryLine_Ref; "Enter Time Entry Line") { }
             actionref(Unpause_Ref; "UnPause Action") { }
+            actionref(GenerateCopilot_Ref; "GenerateCopilot") { }
         }
     }
 
