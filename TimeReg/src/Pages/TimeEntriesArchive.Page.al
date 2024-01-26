@@ -4,7 +4,6 @@ page 75005 "BNO Time Entries Archive"
     Caption = 'Time Entries Archive';
     PageType = Card;
     SourceTable = "BNO Time Entry Archive";
-    UsageCategory = Lists;
 
     layout
     {
