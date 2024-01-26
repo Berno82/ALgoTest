@@ -13,10 +13,12 @@ codeunit 75003 "BNO Copilot Setup"
     local procedure RegisterCapability()
     var
         CopilotCapability: Codeunit "Copilot Capability";
+        EnvironmentInformation: Codeunit "Environment Information";
         LearnMoreUrlTxt: Label 'Test Copilot for TIme registration';
     begin
-        if not CopilotCapability.IsCapabilityRegistered(Enum::"Copilot Capability"::"Create Time Entry Line") then
-            CopilotCapability.RegisterCapability(Enum::"Copilot Capability"::"Create Time Entry Line", Enum::"Copilot Availability"::"Generally Available", LearnMoreUrlTxt);
+        if EnvironmentInformation.IsSaaS() then
+            if not CopilotCapability.IsCapabilityRegistered(Enum::"Copilot Capability"::"Create Time Entry Line") then
+                CopilotCapability.RegisterCapability(Enum::"Copilot Capability"::"Create Time Entry Line", Enum::"Copilot Availability"::"Generally Available", LearnMoreUrlTxt);
     end;
 
 

@@ -80,6 +80,10 @@ table 75001 "BNO Time Entry Line"
             FieldClass = FlowField;
             CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
         }
+        field(13; Accepted; Boolean)
+        {
+            Caption = 'Accepted';
+        }
 
     }
     keys
@@ -119,10 +123,8 @@ table 75001 "BNO Time Entry Line"
     // PTime: Duration;
     // PTimeUnits: Decimal;
     begin
-        if Rec.Activity <> '' then begin
-            PActivity.Get(Rec.User, Rec.Activity);
+        if (Rec.Activity <> '') and PActivity.Get(Rec.User, Rec.Activity) then
             if PActivity."Calculate Consumption" then
                 PActivity.CalcRemainingTime(PActivity, Rec."Registred Time Units", Rec."Registred Time");
-        end;
     end;
 }

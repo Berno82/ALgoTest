@@ -71,7 +71,7 @@ page 75002 "BNO Time Entry Lines"
     var
         PActivity: Record "BNO Activity";
     begin
-        PActivity.Get(Rec.User, Rec.Activity);
-        PActivity.SetStyleVar(StyleVar);
+        if PActivity.Get(Rec.User, Rec.Activity) then
+            PActivity.SetStyleVar(StyleVar);
     end;
 }

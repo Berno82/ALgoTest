@@ -38,40 +38,46 @@ page 75007 "BNO Generate Time Entry Line"
                 ApplicationArea = All;
                 Caption = 'Date';
                 Editable = false;
-                ToolTip = 'Date';
+                ToolTip = 'Date that you register Time to';
             }
             field(FromTime; Rec."From Time")
             {
                 ApplicationArea = All;
                 Caption = 'From Time';
-                ToolTip = 'From Time';
+                ToolTip = 'Start Time of the Time Entry Line';
             }
             field(ToTime; Rec."To Time")
             {
                 ApplicationArea = All;
                 Caption = 'To Time';
-                ToolTip = 'To Time';
+                ToolTip = 'End Time of the Time Entry Line';
             }
             field(Description; Rec.Description)
             {
                 ApplicationArea = All;
                 Caption = 'Description';
-                ToolTip = 'Description';
+                ToolTip = 'Description of the job done';
             }
             field(Activity; Rec.Activity)
             {
                 ApplicationArea = All;
                 Caption = 'Activity';
-                ToolTip = 'Activity';
+                ToolTip = 'Activity to register Time to';
             }
-        }
+            field(Accepted; Rec.Accepted)
+            {
+                ApplicationArea = All;
+                Caption = 'Accepted';
+                ToolTip = 'Time Entry Line is accepted';
+            }
 
-        // area(PromptOptions)
-        // {
-        //     field(Tone; Tone) { }
-        //     field(TextFormat; TextFormat) { }
-        //     field(Empasis; Empasis) { }
-        // }
+            // area(PromptOptions)
+            // {
+            //     field(Tone; Tone) { }
+            //     field(TextFormat; TextFormat) { }
+            //     field(Empasis; Empasis) { }
+            // }
+        }
     }
     actions
     {
@@ -83,27 +89,50 @@ page 75007 "BNO Generate Time Entry Line"
                 ToolTip = 'Generate Time Entry Line Copilot suggestion';
                 trigger OnAction()
                 var
-                    // GenerateTimeEntryLine: Codeunit "BNO Insert Time Entry";
+                    TimeEntryLine: Record "BNO Time Entry Line";
+                    GenerateTimeEntryLine: Codeunit "BNO Copilot Generation";
+                    Counter: Integer;
                     ResultToken: Text;
                     JsonObject: JsonObject;
                     JsonToken: JsonToken;
+                    JsonArray: JsonArray;
                 begin
-                    // ResultToken := GenerateTimeEntryLine.GenerateTimeEntries(UserInput);
-                    ResultToken := UserInput;
-                    JsonObject.ReadFrom(UserInput);
-                    Rec.Init();
-                    JsonObject.Get('date', JsonToken);
-                    Rec.Date := JsonToken.AsValue().AsDate();
-                    JsonObject.Get('fromTime', JsonToken);
-                    Rec."From Time" := JsonToken.AsValue().AsTime();
-                    JsonObject.Get('toTime', JsonToken);
-                    Rec."To Time" := JsonToken.AsValue().AsTime();
-                    JsonObject.Get('description', JsonToken);
-                    Rec.Description := CopyStr(JsonToken.AsValue().AsText(), 1, MaxStrLen(Rec.Description));
-                    if JsonObject.Get('activity', JsonToken) then
-                        Rec.Activity := CopyStr(JsonToken.AsValue().AsText(), 1, MaxStrLen(Rec.Activity));
-                    Rec.User := UserId();
-                    Rec.Insert();
+                    ResultToken := GenerateTimeEntryLine.GenerateTimeEntries(UserInput);
+                    if JsonArray.ReadFrom(ResultToken) then
+                        for Counter := 1 to JsonArray.Count do begin
+                            JsonArray.Get(Counter - 1, JsonToken);
+                            JsonObject := JsonToken.AsObject();
+                            // Rec.Init();
+                            JsonObject.Get('date', JsonToken);
+                            Rec.Date := JsonToken.AsValue().AsDate();
+                            JsonObject.Get('fromTime', JsonToken);
+                            Rec."From Time" := JsonToken.AsValue().AsTime();
+                            JsonObject.Get('toTime', JsonToken);
+                            Rec."To Time" := JsonToken.AsValue().AsTime();
+                            if JsonObject.Get('description', JsonToken) then
+                                Rec.Description := CopyStr(JsonToken.AsValue().AsText(), 1, MaxStrLen(Rec.Description))
+                            else
+                                Rec.Description := '';
+                            if JsonObject.Get('activity', JsonToken) then
+                                Rec.Activity := CopyStr(JsonToken.AsValue().AsText(), 1, MaxStrLen(Rec.Activity))
+                            else
+                                Rec.Activity := '';
+                            Rec.User := CopyStr(UserId(), 1, MaxStrLen(Rec.User));
+                            TimeEntryLine.SetRange(User, Rec.User);
+                            TimeEntryLine.SetRange(Date, Rec.Date);
+                            if TimeEntryLine.FindLast() then
+                                Rec."Entry No." := TimeEntryLine."Entry No." + 1000 + Rec."Entry No."
+                            else
+                                Rec."Entry No." += 1000;
+
+                            Rec.Insert();
+                        end
+                    else begin
+                        Rec.Init();
+                        Rec.Description := CopyStr(ResultToken, 1, MaxStrLen(Rec.Description));
+                        Rec.Insert();
+                    end;
+
 
                 end;
             }
@@ -141,23 +170,21 @@ page 75007 "BNO Generate Time Entry Line"
 
     var
         UserInput: Text[1024];
-    // Date: Date;
-    // FromTime: Time;
-    // ToTime: Time;
-    // Description: Text[1024];
-    // Activity: Code[20];
-
-    // trigger OnOpenPage()
-    // begin
-    //     Date := WorkDate();
-    // end;
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
-        InsertTimeEntry: Codeunit "BNO Insert Time Entry";
+        InsertTimeEntry: Codeunit "BNO Copilot Generation";
     begin
-        if CloseAction = CloseAction::Ok then
-            InsertTimeEntry.InsertTimeEntry(Rec);
+        if CloseAction = CloseAction::Ok then begin
+            Rec.SetRange(Accepted, true);
+            Rec.FindSet();
+            repeat
+                if Rec.Date = Today() then
+                    InsertTimeEntry.InsertTimeEntry(Rec)
+                else
+                    InsertTimeEntry.InsertTimeEntryArchive(Rec);
+            until Rec.Next() = 0;
+        end;
     end;
 
     local procedure ImportUserInput(var IUserInput: Text[1024])

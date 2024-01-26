@@ -103,6 +103,12 @@ page 75005 "BNO Time Entries Archive"
                 end;
             }
         }
+
+        area(Promoted)
+        {
+            actionref(Sum_ref;Sum) {}
+            actionref(Lines_ref;Lines) {}
+        }
     }
 
     var
@@ -115,6 +121,11 @@ page 75005 "BNO Time Entries Archive"
     begin
         TimeRegSetup.Get(UserID);
         Units := TimeRegSetup."Unit of Measure" = Timeregsetup."Unit of Measure"::Units;
-        VisibleSum := true;
+        // VisibleSum := true;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        VisibleSum := Not Rec.Sorted
     end;
 }

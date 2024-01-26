@@ -1,0 +1,3 @@
+ApiKey = 'a6f44b2500094cb89431b2924c22d738'
+Deployment = TimeReg
+Endpoint = 'https://time.openai.azure.com/'

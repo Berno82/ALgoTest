@@ -29,6 +29,38 @@
             "enableLongRunningSqlStatements": true,
             "longRunningSqlStatementsThreshold": 500,
             "numberOfSqlStatements": 10
+        },
+        {
+            "name": "TimeReg IUR",
+            "type": "al",
+            "request": "launch",
+            "environmentType": "Sandbox",
+            "environmentName": "TimeReg",
+            "tenant": "1fdf3400-c721-4fc4-84ca-7163d6ba4399",
+            "startupObjectId": 75001,
+            "breakOnError": "All",
+            "breakOnRecordWrite": "None",
+            "launchBrowser": true,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10
+        },
+        {
+            "name": "TimeReg IUR Debug",
+            "type": "al",
+            "request": "attach",
+            "environmentType": "Sandbox",
+            "environmentName": "TimeReg",
+            "tenant": "1fdf3400-c721-4fc4-84ca-7163d6ba4399",
+            "breakOnError": "All",
+            "breakOnRecordWrite": "None",
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "breakOnNext": "WebClient",
+            "userId": "e2f91c67-c12c-44c6-86fb-cbc6054cb183"
         }
     ]
 }

@@ -47,6 +47,7 @@ page 75003 "BNO TimeReg Setup"
     begin
         if not Rec.Get(UserId()) then begin
             Rec.Init();
+            Rec.User := CopyStr(UserId(),1,MaxStrLen(Rec.User));
             Rec.Insert();
         end;
 

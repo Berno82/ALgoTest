@@ -184,8 +184,8 @@ page 75001 "BNO Time Entry Card"
                     TimeEntryArchive.FilterGroup(2);
                     TimeEntryArchive.SetRange(User, Rec.User);
                     TimeEntryArchive.FilterGroup(0);
-                    TimeEntryArchive.FindLast();
-                    TimeEntriesArchive.SetRecord(TimeEntryArchive);
+                    if TimeEntryArchive.FindLast() then
+                        TimeEntriesArchive.SetRecord(TimeEntryArchive);
                     TimeEntriesArchive.Run();
                 end;
             }

@@ -221,13 +221,13 @@ codeunit 75000 "BNO TimeReg Utillities"
         TimeEntryLineSorted.SetRange(Date, Date);
         if TimeEntryLineSorted.FindSet() then
             repeat
-                Pactivity.Get(TimeEntryLineSorted.User, TimeEntryLineSorted.Activity);
-                if TimeEntryLineSorted.Activity <> '' then
-                    if Pactivity."Calculate Consumption" then begin
-                        TimeEntryLineSorted."Remaining Time" := Pactivity."Allowed Time Consumption" - Pactivity."Time Consumption";
-                        TimeEntryLineSorted."Remaining Time Units" := Pactivity."Allowed Time Units Consumption" - Pactivity."Time Units Consumption";
-                        TimeEntryLineSorted.Modify();
-                    end;
+                if Pactivity.Get(TimeEntryLineSorted.User, TimeEntryLineSorted.Activity) then
+                    if TimeEntryLineSorted.Activity <> '' then
+                        if Pactivity."Calculate Consumption" then begin
+                            TimeEntryLineSorted."Remaining Time" := Pactivity."Allowed Time Consumption" - Pactivity."Time Consumption";
+                            TimeEntryLineSorted."Remaining Time Units" := Pactivity."Allowed Time Units Consumption" - Pactivity."Time Units Consumption";
+                            TimeEntryLineSorted.Modify();
+                        end;
 
 
             until TimeEntryLineSorted.Next() = 0;
