@@ -33,51 +33,65 @@ page 75007 "BNO Generate Time Entry Line"
 
         area(Content)
         {
-            field("Date"; Rec.Date)
+            // field("Date"; Rec.Date)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Date';
+            //     Editable = false;
+            //     ToolTip = 'Date that you register Time to';
+            // }
+            // field(FromTime; Rec."From Time")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'From Time';
+            //     ToolTip = 'Start Time of the Time Entry Line';
+            // }
+            // field(ToTime; Rec."To Time")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'To Time';
+            //     ToolTip = 'End Time of the Time Entry Line';
+            // }
+            // field(Description; Rec.Description)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Description';
+            //     ToolTip = 'Description of the job done';
+            // }
+            // field(Activity; Rec.Activity)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Activity';
+            //     ToolTip = 'Activity to register Time to';
+            // }
+            // field(Accepted; Rec.Accepted)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Accepted';
+            //     ToolTip = 'Time Entry Line is accepted';
+            // }
+
+            field(HeaderText; HeaderLbl)
             {
                 ApplicationArea = All;
-                Caption = 'Date';
+                Caption = 'Time Entry Line Suggestion';
                 Editable = false;
-                ToolTip = 'Date that you register Time to';
+                ToolTip = 'Suggestion for Time Entry Line';
             }
-            field(FromTime; Rec."From Time")
+            part(CopilotLineSuggestion; "BNO Copilot Entries")
             {
                 ApplicationArea = All;
-                Caption = 'From Time';
-                ToolTip = 'Start Time of the Time Entry Line';
-            }
-            field(ToTime; Rec."To Time")
-            {
-                ApplicationArea = All;
-                Caption = 'To Time';
-                ToolTip = 'End Time of the Time Entry Line';
-            }
-            field(Description; Rec.Description)
-            {
-                ApplicationArea = All;
-                Caption = 'Description';
-                ToolTip = 'Description of the job done';
-            }
-            field(Activity; Rec.Activity)
-            {
-                ApplicationArea = All;
-                Caption = 'Activity';
-                ToolTip = 'Activity to register Time to';
-            }
-            field(Accepted; Rec.Accepted)
-            {
-                ApplicationArea = All;
-                Caption = 'Accepted';
-                ToolTip = 'Time Entry Line is accepted';
+                Caption = 'Copilot Suggestion';
+
             }
 
-            // area(PromptOptions)
-            // {
-            //     field(Tone; Tone) { }
-            //     field(TextFormat; TextFormat) { }
-            //     field(Empasis; Empasis) { }
-            // }
         }
+        // area(PromptOptions)
+        // {
+        //     field(Tone; Tone) { }
+        //     field(TextFormat; TextFormat) { }
+        //     field(Empasis; Empasis) { }
+        // }
     }
     actions
     {
@@ -133,6 +147,7 @@ page 75007 "BNO Generate Time Entry Line"
                         Rec.Insert();
                     end;
 
+                    CurrPage.CopilotLineSuggestion.Page.LoadData(Rec);
 
                 end;
             }
@@ -170,6 +185,7 @@ page 75007 "BNO Generate Time Entry Line"
 
     var
         UserInput: Text[1024];
+        HeaderLbl: Label 'Suggested Time Entry Lines';
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
@@ -185,6 +201,7 @@ page 75007 "BNO Generate Time Entry Line"
                     InsertTimeEntry.InsertTimeEntryArchive(Rec);
             until Rec.Next() = 0;
         end;
+
     end;
 
     local procedure ImportUserInput(var IUserInput: Text[1024])
