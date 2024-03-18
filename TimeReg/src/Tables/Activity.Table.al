@@ -5,7 +5,7 @@ table 75005 "BNO Activity"
 
     fields
     {
-        field(1; "User Name"; Text[100])
+        field(1; "User ID"; Text[100])
         {
             Caption = 'User Name';
         }
@@ -28,7 +28,9 @@ table 75005 "BNO Activity"
             trigger OnValidate()
             begin
                 if "Allowed Time Consumption" <> 0 then
-                    "Calculate Consumption" := true;
+                    "Calculate Consumption" := true
+                else
+                    "Calculate Consumption" := false;
             end;
         }
         field(6; "Allowed Time Units Consumption"; Integer)
@@ -37,7 +39,9 @@ table 75005 "BNO Activity"
             trigger OnValidate()
             begin
                 if "Allowed Time Units Consumption" <> 0 then
-                    "Calculate Consumption" := true;
+                    "Calculate Consumption" := true
+                else
+                    "Calculate Consumption" := false;
             end;
         }
 
@@ -46,14 +50,14 @@ table 75005 "BNO Activity"
             Caption = 'Time Consumption';
             DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
-            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Activity = field("No."), User = field("User Name")));
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time Units" where(Activity = field("No."), User = field("User ID")));
             Editable = false;
         }
         field(8; "Time Consumption"; Duration)
         {
             Caption = 'Time Consumption';
             FieldClass = FlowField;
-            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Activity = field("No."), User = field("User Name")));
+            CalcFormula = sum("BNO Time Entry Line Archive"."Registred Time" where(Activity = field("No."), User = field("User ID")));
             Editable = false;
         }
         field(9; "Remaining Time Units"; Decimal)
@@ -70,7 +74,7 @@ table 75005 "BNO Activity"
     }
     keys
     {
-        key(PK; "User Name", "No.")
+        key(PK; "User ID", "No.")
         {
             Clustered = true;
         }
@@ -82,7 +86,7 @@ table 75005 "BNO Activity"
     }
     trigger OnInsert()
     begin
-        Rec."User Name" := Format(UserId());
+        Rec."User ID" := Format(UserId());
     end;
 
     procedure CalcRemainingTime(Activity: Record "BNO Activity"; CurrTimeUnits: Decimal; CurrTime: Duration)
@@ -105,7 +109,7 @@ table 75005 "BNO Activity"
         TimeRegSetup: Record "BNO TimeReg Setup";
         Low: Boolean;
     begin
-        TimeRegSetup.Get("User Name");
+        TimeRegSetup.Get("User ID");
         case TimeRegSetup."Unit of Measure" of
             TimeRegSetup."Unit of Measure"::Units:
                 begin

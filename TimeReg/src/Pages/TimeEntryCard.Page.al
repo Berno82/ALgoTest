@@ -77,7 +77,14 @@ page 75001 "BNO Time Entry Card"
                 ToolTip = 'Executes the Start Time action.';
 
                 trigger OnAction()
+                var
+                    TimerstartedMsg: Label 'Timer already started';
                 begin
+                    TimeRegSetup.Get(UserId());
+                    if TimeRegSetup."Timer Started" then begin
+                        Message(TimerstartedMsg);
+                        exit;
+                    end;
                     if TimeRegSetup.Pause then
                         TimeRegUtillities.SetLastTime(Time(), false);
                     StartTime();
@@ -90,7 +97,14 @@ page 75001 "BNO Time Entry Card"
                 ToolTip = 'Pause Time registration';
 
                 trigger OnAction()
+                var
+                    PauseMsg: Label 'Pause is already started';
                 begin
+                    TimeRegSetup.Get(UserId());
+                    if TimeRegSetup.Pause then begin
+                        Message(PauseMsg);
+                        exit;
+                    end;
                     TimeRegUtillities.SetLastTime(TimeRegUtillities.GetLastTime(), true);
                     StopTime();
                 end;
@@ -102,8 +116,15 @@ page 75001 "BNO Time Entry Card"
                 ToolTip = 'Pause Time registration';
 
                 trigger OnAction()
-
+                var
+                    PauseMsg: Label 'Pause is not started';
                 begin
+                    TimeRegSetup.Get(UserId());
+                    if not TimeRegSetup.Pause then begin
+                        Message(PauseMsg);
+                        exit;
+                    end;
+
                     Unpause();
 
                 end;
@@ -116,7 +137,9 @@ page 75001 "BNO Time Entry Card"
 
                 trigger OnAction()
                 begin
-                    StopTime();
+                    TimeRegSetup.Get(UserId());
+                    if TimeRegSetup."Timer Started" then
+                        StopTime();
                 end;
             }
             action("Enter Time Entry Line")
@@ -268,10 +291,12 @@ page 75001 "BNO Time Entry Card"
     begin
         TimeRegSetup.Get(UserId());
         CurrPage.TimerControl.StartTime(TimeRegSetup."Wait Time");
+        TimeRegSetup."Timer Started" := true;
     end;
 
     local procedure StopTime()
     begin
         CurrPage.TimerControl.StopTime();
+        TimeRegSetup."Timer Started" := false;
     end;
 }

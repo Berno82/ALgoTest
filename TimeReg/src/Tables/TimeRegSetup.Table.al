@@ -38,6 +38,10 @@ table 75002 "BNO TimeReg Setup"
         {
             Caption = 'Cosumption Warning %';
         }
+        field(8; "Timer Started"; Boolean)
+        {
+            Caption = 'Timer Started', Locked = true;
+        }
     }
     keys
     {

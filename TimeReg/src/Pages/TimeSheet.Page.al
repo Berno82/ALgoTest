@@ -20,6 +20,7 @@ page 75000 "BNO Time Sheet"
                 field(Description; Rec.Description)
                 {
                     ToolTip = 'Specifies the value of the Description field.';
+
                 }
                 field(Activity; Rec.Activity)
                 {
@@ -27,7 +28,14 @@ page 75000 "BNO Time Sheet"
 
                     trigger OnValidate()
                     begin
-                        SetActivityText();
+                        // SetActivityText();
+                        if Rec.Activity <> '' then
+                            if StrLen(Rec.Activity) = 8 then begin
+                                if not (CopyStr(Rec.Activity, 1, 1) = 'A') then
+                                    Error(ActivityErr);
+                            end
+                            else
+                                Error(ActivityErr);
                     end;
                 }
                 field(ActivityDescription; ActivityTxt)
@@ -35,6 +43,24 @@ page 75000 "BNO Time Sheet"
                     Caption = 'Activity Description';
                     ToolTip = 'Specifies the value of the Activity Description field.';
                     Editable = false;
+                }
+            }
+            group(History)
+            {
+                Caption = 'History';
+
+                field("Historic Entry"; Rec."Historic Entry")
+                {
+                    ToolTip = 'Specifies the value of the Historic Entry field.';
+                    trigger OnValidate()
+                    var
+                        EntryHistory: Record "BNO Entry History";
+                    begin
+                        EntryHistory.Get(Rec.User, Rec."Historic Entry");
+                        Rec.Activity := EntryHistory.Activity;
+                        Rec.Description := EntryHistory.Description;
+                        Rec."Historic Entry" := '';
+                    end;
                 }
             }
         }
@@ -52,8 +78,24 @@ page 75000 "BNO Time Sheet"
                 ToolTip = 'Executes the Create Time Entry action.';
 
                 trigger OnAction()
+                var
+                    EntryHistory: Record "BNO Entry History";
                 begin
                     CreateTimeEntry(false, Rec.Description, Rec.Activity);
+                    EntryHistory.SetRange("User ID", Rec.User);
+                    EntryHistory.SetRange("Activity", Rec.Activity);
+                    EntryHistory.SetRange("Description", Rec.Description);
+                    if EntryHistory.FindFirst() then begin
+                        EntryHistory.Date := Today();
+                        EntryHistory.Modify();
+                    end else begin
+                        EntryHistory.Init();
+                        EntryHistory."User ID" := Rec.User;
+                        EntryHistory.Description := Rec.Description;
+                        EntryHistory.Activity := Rec.Activity;
+                        EntryHistory.Date := Today();
+                        EntryHistory.Insert();
+                    end;
                 end;
             }
             action(Pause)
@@ -87,6 +129,7 @@ page 75000 "BNO Time Sheet"
         TimeRegUtillities: Codeunit "BNO TimeReg Utillities";
         ActivityTxt: Text[2048];
         CanClose: Boolean;
+        ActivityErr: Label 'Activity format is not valid';
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
