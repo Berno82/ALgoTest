@@ -43,7 +43,7 @@ table 75006 "BNO Time Entry Line Sorted"
         field(9; Activity; Code[20])
         {
             Caption = 'Activity';
-            TableRelation = "BNO Activity"."No." where("User Name" = FIELD(User));
+            TableRelation = "BNO Activity"."No." where("User ID" = FIELD(User));
         }
         field(10; Paused; Boolean)
         {
@@ -53,13 +53,13 @@ table 75006 "BNO Time Entry Line Sorted"
         {
             Caption = 'Remaining Time';
             FieldClass = FlowField;
-            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User Name" = field(User), "No." = field(Activity)));
+            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User ID" = field(User), "No." = field(Activity)));
         }
         field(12; "Remaining Time Units"; Decimal)
         {
             Caption = 'Remaining Time';
             FieldClass = FlowField;
-            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
+            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User ID" = field(User), "No." = field(Activity)));
         }
     }
     keys

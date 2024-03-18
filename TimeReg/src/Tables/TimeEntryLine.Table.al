@@ -45,11 +45,12 @@ table 75001 "BNO Time Entry Line"
         field(8; Description; Text[1024])
         {
             Caption = 'Description';
+
         }
         field(9; Activity; Code[20])
         {
             Caption = 'Activity';
-            TableRelation = "BNO Activity"."No." where("User Name" = FIELD(User));
+            TableRelation = "BNO Activity"."No." where("User ID" = FIELD(User));
             ValidateTableRelation = false;
 
             trigger OnValidate()
@@ -71,18 +72,24 @@ table 75001 "BNO Time Entry Line"
         {
             Caption = 'Remaining Time';
             FieldClass = FlowField;
-            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User Name" = field(User), "No." = field(Activity)));
+            CalcFormula = lookup("BNO Activity"."Remaining Time" where("User ID" = field(User), "No." = field(Activity)));
         }
         field(12; "Remaining Time Units"; Decimal)
         {
             Caption = 'Remaining Time';
             DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
-            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User Name" = field(User), "No." = field(Activity)));
+            CalcFormula = lookup("BNO Activity"."Remaining Time Units" where("User ID" = field(User), "No." = field(Activity)));
         }
         field(13; Accepted; Boolean)
         {
             Caption = 'Accepted';
+        }
+        field(14; "Historic Entry"; Code[20])
+        {
+            Caption = 'Historic Entry';
+            TableRelation = "BNO Entry History" where("User ID" = field(User));
+            ValidateTableRelation = false;
         }
 
     }
